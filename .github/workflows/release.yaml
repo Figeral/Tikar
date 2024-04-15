@@ -1,0 +1,16 @@
+name: Release workflow
+on:
+    push:
+        branches: [master,dev]
+    pull_request: 
+        branches: [master,dev]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: checking the repository
+              uses: action/@checkoutv3
+
+
