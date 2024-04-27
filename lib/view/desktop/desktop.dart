@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'pages/landing/authentification/login.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:tikar/view/desktop/pages/landing/landing.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -10,6 +12,8 @@ class Desktop extends StatefulWidget {
 }
 
 class _DesktopState extends State<Desktop> {
+  final wm = WindowManager;
+
   final _pageController = PageController();
   @override
   Widget build(BuildContext context) {
@@ -19,18 +23,11 @@ class _DesktopState extends State<Desktop> {
         children: [
           PageView(
             controller: _pageController,
-            children: [
-              Container(
-                decoration: const BoxDecoration(color: Colors.white),
-                child: const Landing(),
-              ),
-              Container(
-                decoration: const BoxDecoration(color: Colors.red),
-              ),
+            children: const [
+              Landing(),
+              Login(),
             ],
           ),
-          GestureDetector(),
-          Container(),
           Container(
             alignment: const Alignment(0, 0.75),
             child: SmoothPageIndicator(

@@ -5,6 +5,40 @@ class Landing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            alignment: const Alignment(0, -1),
+            child: const SizedBox(
+              height: 290,
+              width: 400,
+              child: Image(image: AssetImage("assets/images/tikar.png")),
+            ),
+          ),
+          Container(
+            alignment: const Alignment(0, -0.0),
+            child: const SizedBox(
+              height: 450,
+              width: 450,
+              child: Image(
+                image: AssetImage("assets/images/management.png"),
+              ),
+            ),
+          ),
+          Container(
+            alignment: const Alignment(0, 0.5),
+            child: const Text(
+              "Votre Application de Gestion Locatif",
+              style: TextStyle(
+                  fontFamily: "AbyssinicaSIL",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
