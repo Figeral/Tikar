@@ -54,7 +54,8 @@ class _AuthenticateState extends State<Authenticate>
               width: sWidth * 0.6,
               height: sHeight,
               child: Padding(
-                padding: EdgeInsets.all(sWidth * 0.15),
+                padding: EdgeInsets.fromLTRB(
+                    sWidth * 0.15, sWidth * 0.05, sWidth * 0.15, sWidth * 0.15),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.end,
                   // crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +83,7 @@ class _AuthenticateState extends State<Authenticate>
                           children: const [
                             //Center(child: Text("Hello Login")),
                             Login(),
-                            Center(child: Text("Hello signin"))
+                            SignIn()
                           ],
                         ),
                       ),
