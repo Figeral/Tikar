@@ -32,7 +32,7 @@ class Landing extends StatelessWidget {
             child: const Text(
               "Votre Application de Gestion Locatif",
               style: TextStyle(
-                  fontFamily: "AbyssinicaSIL",
+                  fontFamily: "Poppins",
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
             ),

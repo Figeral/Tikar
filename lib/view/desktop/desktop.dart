@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'pages/landing/authentification/login.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:tikar/view/desktop/pages/landing/landing.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tikar/view/desktop/pages/landing/authentification/authenticate.dart';
 
 class Desktop extends StatefulWidget {
   const Desktop({super.key});
@@ -25,11 +25,11 @@ class _DesktopState extends State<Desktop> {
             controller: _pageController,
             children: const [
               Landing(),
-              Login(),
+              Authenticate(),
             ],
           ),
           Container(
-            alignment: const Alignment(0, 0.75),
+            alignment: const Alignment(0, 0.80),
             child: SmoothPageIndicator(
               controller: _pageController, count: 2,
               onDotClicked: (int toPageIndex) {
