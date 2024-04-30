@@ -32,8 +32,10 @@ class _AuthenticateState extends State<Authenticate>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration:
-                  BoxDecoration(color: Color.fromARGB(125, 219, 208, 219)),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(125, 219, 208, 219),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -55,7 +57,7 @@ class _AuthenticateState extends State<Authenticate>
               height: sHeight,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
-                    sWidth * 0.15, sWidth * 0.05, sWidth * 0.15, sWidth * 0.15),
+                    sWidth * 0.10, sWidth * 0.05, sWidth * 0.15, sWidth * 0.15),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.end,
                   // crossAxisAlignment: CrossAxisAlignment.center,

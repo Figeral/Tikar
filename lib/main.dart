@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const Home(),
-      theme: ThemeData(fontFamily: "AbyssinicaSIL"),
-    );
+        debugShowCheckedModeBanner: false,
+        home: const Home(),
+        //theme: ThemeData(fontFamily: "AbyssinicaSIL"),
+        theme: ThemeData(fontFamily: "Poppins"));
   }
 }
