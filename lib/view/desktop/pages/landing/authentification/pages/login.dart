@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tikar/view/desktop/pages/content/app_content.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -95,6 +96,11 @@ class _LoginState extends State<Login> {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
                   // ... Navigate To your Home Page
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AppContent()));
                 }
               },
               child: Text(
