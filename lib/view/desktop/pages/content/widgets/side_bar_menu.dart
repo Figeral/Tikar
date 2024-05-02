@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tikar/vm/sidebar_vm.dart';
 import 'package:tikar/model/icon_model.dart';
 import 'package:tikar/constants/app_colors.dart';
 
@@ -39,6 +40,7 @@ class _SideBarState extends State<SideBar> {
       child: InkWell(
         onTap: () => setState(() {
           selectedIndex = index;
+          //SideBarViewModel().selectScreenIndex(selectedIndex);
         }),
         child: Row(
           children: [

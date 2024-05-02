@@ -11,6 +11,7 @@ class SignIn extends StatefulWidget {
 final _formKey = GlobalKey<FormState>();
 
 class _SignInState extends State<SignIn> {
+  bool isPressed = true;
   TextEditingController nameController = TextEditingController();
   TextEditingController telController = TextEditingController();
   TextEditingController pwController = TextEditingController();
@@ -81,10 +82,25 @@ class _SignInState extends State<SignIn> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
                 child: TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.lock_open),
+                  obscureText: isPressed,
+                  decoration: InputDecoration(
+                    suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isPressed = !isPressed;
+                            // if (isPressed == true) {
+                            //   isPressed = false;
+                            // } else {
+                            //   isPressed = true;
+                            // }
+                          });
+                        },
+                        child: Icon(isPressed
+                            ? Icons.visibility
+                            : Icons.visibility_off)),
+                    prefixIcon: const Icon(Icons.lock_open),
                     hintText: 'mots de passe',
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
@@ -102,10 +118,24 @@ class _SignInState extends State<SignIn> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
                 child: TextFormField(
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.lock_open),
+                  obscureText: isPressed,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.lock_open),
+                    suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (isPressed == true) {
+                              isPressed = false;
+                            } else {
+                              isPressed = true;
+                            }
+                          });
+                        },
+                        child: Icon(isPressed
+                            ? Icons.visibility
+                            : Icons.visibility_off)),
                     hintText: 'Confirmation',
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),

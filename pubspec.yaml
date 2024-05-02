@@ -37,9 +37,10 @@ dependencies:
   http: ^1.2.0
   smooth_page_indicator: ^1.1.0
   shimmer_animation: ^2.1.0+1
-  video_player: ^2.8.6
+  
   window_manager: ^0.3.8
   image_picker: ^1.0.8
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:

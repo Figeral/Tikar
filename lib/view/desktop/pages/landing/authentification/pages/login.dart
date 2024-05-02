@@ -20,6 +20,7 @@ class _LoginState extends State<Login> {
     pwController.dispose();
   }
 
+  bool isPressed = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +54,23 @@ class _LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
               child: TextFormField(
-                decoration: const InputDecoration(
+                obscureText: isPressed,
+                decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock_open),
+                  suffix: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressed == true) {
+                            isPressed = false;
+                          } else {
+                            isPressed = true;
+                          }
+                        });
+                      },
+                      child: Icon(
+                          isPressed ? Icons.visibility : Icons.visibility_off)),
                   hintText: 'mots de passe',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                 ),

@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/constants/app_colors.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/assets.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/lessor.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/renter.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/location.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/dashbord.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/side_bar_menu.dart';
 
-class AppContent extends StatelessWidget {
+class AppContent extends StatefulWidget {
   const AppContent({super.key});
 
+  @override
+  State<AppContent> createState() => _AppContentState();
+}
+
+class _AppContentState extends State<AppContent> {
+  final appContent = const <Widget>[
+    Dashboard(),
+    Assets(),
+    Location(),
+    Renter(),
+    Lessor(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +44,9 @@ class AppContent extends StatelessWidget {
           ),
           Expanded(
             flex: 10,
-            child: Container(color: Colors.lightGreenAccent),
+            child: Container(
+              color: Colors.lightGreenAccent,
+            ),
           )
         ],
       )),
