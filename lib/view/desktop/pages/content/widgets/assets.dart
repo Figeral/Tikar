@@ -10,6 +10,8 @@ class Assets extends StatefulWidget {
 class _AssetsState extends State<Assets> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: Colors.blue,
+    );
   }
 }

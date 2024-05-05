@@ -1,10 +1,16 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class SideBarViewModel extends ChangeNotifier {
-  int _index = 0;
-  int get index => _index;
-  void selectScreenIndex(int selectedIndex) {
-    _index = selectedIndex;
-    notifyListeners();
+class SideBarViewModel {
+  SideBarViewModel();
+
+  final StreamController<int> _streamController = StreamController<int>();
+  Stream<int>? get stream => _streamController.stream;
+
+  void changedIndex(int index) {
+    _streamController.add(index);
+  }
+
+  void dispose() {
+    _streamController.close();
   }
 }

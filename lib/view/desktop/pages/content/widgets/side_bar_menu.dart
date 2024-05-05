@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:tikar/vm/sidebar_vm.dart';
 import 'package:tikar/model/icon_model.dart';
 import 'package:tikar/constants/app_colors.dart';
 
 class SideBar extends StatefulWidget {
-  const SideBar({super.key});
+  final void Function(int currentIndex) callback;
+  const SideBar({super.key, required this.callback});
 
   @override
-  State<SideBar> createState() => _SideBarState();
+  _SideBarState createState() => _SideBarState();
 }
 
 class _SideBarState extends State<SideBar> {
   int selectedIndex = 0;
   MenuData data = MenuData();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
       color: Theme.of(context).scaffoldBackgroundColor,
-      // color: Colors.black,
       child: ListView.builder(
         itemCount: data.menu.length,
         itemBuilder: (context, index) => buildMenuEntry(data, index),
@@ -40,7 +40,8 @@ class _SideBarState extends State<SideBar> {
       child: InkWell(
         onTap: () => setState(() {
           selectedIndex = index;
-          //SideBarViewModel().selectScreenIndex(selectedIndex);
+
+          widget.callback(selectedIndex);
         }),
         child: Row(
           children: [
@@ -73,5 +74,6 @@ class MenuData {
     IconModel(icon: Icons.key, title: "Locations"),
     IconModel(icon: Icons.people_alt, title: "Locataires"),
     IconModel(icon: Icons.person, title: "Proprietaire"),
+    IconModel(icon: Icons.engineering, title: "Employée"),
   ];
 }
