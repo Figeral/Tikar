@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/model/icon_model.dart';
 import 'package:tikar/constants/app_colors.dart';
+// import 'package:tikar/model/app-model/icon_model.dart';
 
 class SideBar extends StatefulWidget {
   final void Function(int currentIndex) callback;
@@ -18,7 +19,7 @@ class _SideBarState extends State<SideBar> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
-      color: Theme.of(context).scaffoldBackgroundColor,
+      color: Colors.grey.shade200,
       child: ListView.builder(
         itemCount: data.menu.length,
         itemBuilder: (context, index) => buildMenuEntry(data, index),

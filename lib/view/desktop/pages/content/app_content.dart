@@ -42,28 +42,29 @@ class _AppContentState extends State<AppContent> {
         children: [
           Expanded(
             flex: 3,
-            child: Column(
-              children: [
-                Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: const Image(
-                          image: AssetImage("assets/images/tikar.png")),
-                    )),
-                Expanded(
-                    flex: 6,
-                    child: SideBar(
-                      callback: (currentIndex) => vm.changedIndex(currentIndex),
-                    )),
-              ],
+            child: Container(
+              color: Colors.grey.shade200,
+              child: Column(
+                children: [
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                        child: const Image(
+                            image: AssetImage("assets/images/tikar.png")),
+                      )),
+                  Expanded(
+                      flex: 6,
+                      child: SideBar(
+                        callback: (currentIndex) =>
+                            vm.changedIndex(currentIndex),
+                      )),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 5,
           ),
           const Divider(
             thickness: 3,
-            color: Colors.black12,
+            color: Colors.red,
           ),
           Expanded(
             flex: 10,
@@ -72,7 +73,13 @@ class _AppContentState extends State<AppContent> {
               stream: vm.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return appContent[snapshot.data!.abs()];
+                  return Scaffold(
+                    appBar: AppBar(
+                      automaticallyImplyLeading: false,
+                      backgroundColor: Colors.grey.shade400,
+                    ),
+                    body: SafeArea(child: appContent[snapshot.data!.abs()]),
+                  );
                 } else {
                   return const Text("Stream failed");
                 }
