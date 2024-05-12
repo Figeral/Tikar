@@ -1,6 +1,7 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:tikar/model/app-model/card_model.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 class Lessor extends StatefulWidget {
   const Lessor({super.key});
@@ -11,7 +12,7 @@ class Lessor extends StatefulWidget {
 
 class _LessorState extends State<Lessor> {
   LessorCardDetails detail =
-      LessorCardDetails(value1: 120, value2: 45, value3: 12, value4: 23);
+      LessorCardDetails(value1: 16, value2: 37, value3: 12, value4: 23);
   @override
   Widget build(BuildContext context) {
     final sHeight = MediaQuery.of(context).size.height;
@@ -49,7 +50,39 @@ class _LessorState extends State<Lessor> {
                   itemBuilder: (context, index) => buildGrid(detail, index),
                 ),
               ),
-            )
+            ),
+            DataTable(
+                //headingTextStyle: TextStyle(color: Colors.yellow),
+                columns: const <DataColumn>[
+                  DataColumn(
+                      label: Text(
+                    "noms",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text(
+                    "Prenoms",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text(
+                    "Contact",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text(
+                    "Bien",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )),
+                ],
+                rows: <DataRow>[
+                  DataRow.byIndex(cells: const [
+                    DataCell(Text("Mouliom")),
+                    DataCell(Text("Fitzgerald")),
+                    DataCell(Text("690462556")),
+                    DataCell(Text("Villa brown city")),
+                  ]),
+                ]),
           ],
         ),
       ),
@@ -126,8 +159,9 @@ class LessorCardDetails {
             name: "Au Cameroun",
             value: value3),
         CardModel(
-            otherIcon: "assets/images/building.svg",
-            name: "Nombre d'immeuble",
+            // otherIcon: "assets/images/building.svg",
+            icon: Icons.rocket_launch_outlined,
+            name: "à l'étranger",
             value: value4),
       ];
 }

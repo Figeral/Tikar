@@ -15,7 +15,7 @@ class Assets extends StatefulWidget {
 
 class _AssetsState extends State<Assets> {
   AssetCardDetails detail =
-      AssetCardDetails(value1: 120, value2: 45, value3: 12, value4: 23);
+      AssetCardDetails(value1: 22, value2: 95, value3: 12, value4: 23);
   @override
   Widget build(BuildContext context) {
     final sHeight = MediaQuery.of(context).size.height;
@@ -26,9 +26,9 @@ class _AssetsState extends State<Assets> {
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
         child: Column(
           children: <Widget>[
-            Text(
-              'Management  Immobilier  "height : $sHeight and width : $sWidth',
-              style: const TextStyle(
+            const Text(
+              'Management  Immobilier',
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
@@ -53,7 +53,36 @@ class _AssetsState extends State<Assets> {
                   itemBuilder: (context, index) => buildGrid(detail, index),
                 ),
               ),
-            )
+            ),
+            DataTable(columns: const <DataColumn>[
+              DataColumn(
+                  label: Text(
+                "noms",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+              DataColumn(
+                  label: Text(
+                "Propriétaire",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+              DataColumn(
+                  label: Text(
+                "Superficie /M2",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+              DataColumn(
+                  label: Text(
+                "value estime /Million",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+            ], rows: const <DataRow>[
+              DataRow(cells: [
+                DataCell(Text("Brown town")),
+                DataCell(Text("Mouliom_Fitzgerald")),
+                DataCell(Text("1200")),
+                DataCell(Text("60000000")),
+              ])
+            ]),
           ],
         ),
       ),
