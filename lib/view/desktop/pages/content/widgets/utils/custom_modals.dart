@@ -2,32 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomModelWidget extends StatefulWidget {
-  bool isVisible;
-  CustomModelWidget({required this.isVisible});
+  bool visibility;
+
+  CustomModelWidget({required this.visibility});
   @override
   _CustomModelWidgetState createState() => _CustomModelWidgetState();
 }
 
 class _CustomModelWidgetState extends State<CustomModelWidget> {
   late bool _isVisible;
-  @override
-  void didUpdateWidget(covariant CustomModelWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isVisible != oldWidget.isVisible) {
-      _isVisible = widget.isVisible;
-    }
-  }
+  // @override
+  // void didUpdateWidget(covariant CustomModelWidget oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (widget.isVisible != oldWidget.isVisible) {
+  //     _isVisible = widget.isVisible;
+  //   }
+  // }
 
-  @override
-  void initState() {
-    _isVisible = widget.isVisible;
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _isVisible = widget.isVisible;
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: _isVisible,
+      visible: widget.visibility,
       child: Positioned(
         left: 250,
         top: 150,

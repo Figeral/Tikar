@@ -16,25 +16,19 @@ class Lessor extends StatefulWidget {
 }
 
 class _LessorState extends State<Lessor> {
-  void result() async {
-    comparableData = await fetchData();
-  }
-
-  Future<List<dynamic>> info() async =>
-      await vm.stream.map((stream) => stream).toList();
-  blabla() async => await info();
   @override
   void initState() {
     super.initState();
-    print(comparableData);
   }
 
   bool _isVisible = false;
+
   TextEditingController searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   LessorCardDetails detail =
       LessorCardDetails(value1: 16, value2: 37, value3: 12, value4: 23);
+
   @override
   void dispose() {
     searchInputController.dispose();
@@ -44,30 +38,7 @@ class _LessorState extends State<Lessor> {
   final _columnIndex = 0;
   final _columnAscending = true;
 
-  List<List<Object>> comparableData = [];
   final vm = LessorViewModel();
-  List<LessorModel> data = [];
-
-  Future<List<List<Object>>> fetchData() async {
-    vm.stream.map((stream) => stream).toList();
-    List model = await vm.getLessor();
-
-    model.forEach((element) {
-      data.add(LessorModel.fromJson(element));
-    });
-    comparableData = data
-        .map((model) => [
-              model.id,
-              model.fname,
-              model.lname,
-              model.tel,
-              model.isActive ?? false,
-              //  model.image ?? Uint8List(0),
-            ])
-        .toList();
-
-    return comparableData;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,16 +102,20 @@ class _LessorState extends State<Lessor> {
                         if (snapshot.hasData) {
                           print("here is result ${snapshot.data}");
                           return PaginatedData(
+                            refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
-                            isVisible: _isVisible,
+                            // isVisible: _isVisible,
                             comparableData: snapshot.data,
                             col1: "ID",
                             col2: "First Name",
                             col3: "Last Name",
                             col4: "Telephone",
                             col5: "Active",
+                            visibility: (bool isVisible) {
+                              _isVisible = isVisible;
+                            },
                           );
                         } else {
                           return const CircularProgressIndicator();
@@ -151,7 +126,7 @@ class _LessorState extends State<Lessor> {
             ),
           ),
           CustomModelWidget(
-            isVisible: _isVisible,
+            visibility: _isVisible,
           ),
         ],
       ),
@@ -239,7 +214,3 @@ class LessorCardDetails {
             value: value4),
       ];
 }
-
-List<List<Object>> testData = <List<Object>>[
-  <Object>[1, "Nsangou Mouliom", "Fitzgerald", 690462556, "hello Nothing here"],
-];

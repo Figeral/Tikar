@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const Home(),
+
         // title: "hello world",
         //theme: ThemeData(fontFamily: "AbyssinicaSIL"),
         theme: ThemeData(fontFamily: "Poppins"));

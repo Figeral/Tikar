@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
               height: 10.0,
             ),
             const Text(
-              'Créer un compte signifie que vous acceptez nos conditions d\'utilisation et notre politique de confidentialité.',
+              'Si vous n\'avez pas de compte allez sur SignIn et attendez Validation de votre compte par notre administration ansi que l\'attribution de vos accès',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             ),
@@ -102,9 +102,10 @@ class _LoginState extends State<Login> {
                     MaterialStateProperty.all(Colors.deepPurpleAccent),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                //  textStyle: MaterialStateProperty.all(TextStyle()),
               ),
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
@@ -123,7 +124,8 @@ class _LoginState extends State<Login> {
                     color: Theme.of(context)
                         .scaffoldBackgroundColor
                         .withOpacity(0.5),
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15),
               ),
             ),
           ],

@@ -153,13 +153,21 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
               ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              const Text(
+                'Créer un compte signifie que vous acceptez nos conditions d\'utilisation et notre politique de confidentialité. Tout doit réserver par Tikar',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey),
+              ),
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(Colors.deepPurpleAccent),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
@@ -175,12 +183,13 @@ class _SignInState extends State<SignIn> {
                   }
                 },
                 child: Text(
-                  'SignIn',
+                  'Signin',
                   style: TextStyle(
                       color: Theme.of(context)
                           .scaffoldBackgroundColor
                           .withOpacity(0.5),
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
                 ),
               ),
             ],

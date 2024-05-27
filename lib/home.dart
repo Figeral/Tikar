@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/view/phone/phone.dart';
-import 'package:tikar/view/desktop/desktop.dart';
+import 'package:tikar/view/desktop/splash.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,6 +14,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: ((context, constraints) =>
-            constraints.maxWidth > 450 ? const Desktop() : const Phone()));
+            constraints.maxWidth > 450 ? const SplashScreen() : const Phone()));
   }
 }
