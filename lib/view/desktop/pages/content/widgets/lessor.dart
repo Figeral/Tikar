@@ -1,7 +1,12 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:tikar/vm/lessor_vm.dart';
 import 'package:tikar/model/app-model/card_model.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:tikar/model/data-models/lessor_model.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/data_source.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
 
 class Lessor extends StatefulWidget {
   const Lessor({super.key});
@@ -11,125 +16,194 @@ class Lessor extends StatefulWidget {
 }
 
 class _LessorState extends State<Lessor> {
+  void result() async {
+    comparableData = await fetchData();
+  }
+
+  Future<List<dynamic>> info() async =>
+      await vm.stream.map((stream) => stream).toList();
+  blabla() async => await info();
+  @override
+  void initState() {
+    super.initState();
+    print(comparableData);
+  }
+
+  bool _isVisible = false;
+  TextEditingController searchInputController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   LessorCardDetails detail =
       LessorCardDetails(value1: 16, value2: 37, value3: 12, value4: 23);
+  @override
+  void dispose() {
+    searchInputController.dispose();
+    super.dispose();
+  }
+
+  final _columnIndex = 0;
+  final _columnAscending = true;
+
+  List<List<Object>> comparableData = [];
+  final vm = LessorViewModel();
+  List<LessorModel> data = [];
+
+  Future<List<List<Object>>> fetchData() async {
+    vm.stream.map((stream) => stream).toList();
+    List model = await vm.getLessor();
+
+    model.forEach((element) {
+      data.add(LessorModel.fromJson(element));
+    });
+    comparableData = data
+        .map((model) => [
+              model.id,
+              model.fname,
+              model.lname,
+              model.tel,
+              model.isActive ?? false,
+              //  model.image ?? Uint8List(0),
+            ])
+        .toList();
+
+    return comparableData;
+  }
+
   @override
   Widget build(BuildContext context) {
     final sHeight = MediaQuery.of(context).size.height;
     final sWidth = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
-        child: Column(
-          children: <Widget>[
-            const Text(
-              'Management  Bailleur',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
-            ),
-            const SizedBox(
-              height: 45,
-            ),
-            Center(
-              child: Container(
-                //color: Colors.grey.shade200,
-                constraints: const BoxConstraints(
-                    maxHeight: 450, maxWidth: 1900, minWidth: 880),
-                width: sWidth * 0.7,
-                height: sHeight * 0.35,
-                child: GridView.builder(
-                  itemCount: 4,
-                  padding: const EdgeInsets.all(20),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12),
-                  itemBuilder: (context, index) => buildGrid(detail, index),
+      child: Stack(
+        clipBehavior: Clip.antiAlias,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
+            child: Column(
+              children: <Widget>[
+                const Text(
+                  'Management  Bailleur',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
                 ),
-              ),
+                const SizedBox(
+                  height: 45,
+                ),
+                Center(
+                  child: Container(
+                    //color: Colors.grey.shade200,
+                    constraints: const BoxConstraints(
+                        maxHeight: 450, maxWidth: 1900, minWidth: 880),
+                    width: sWidth * 0.7,
+                    height: sHeight * 0.35,
+                    child: GridView.builder(
+                      itemCount: 4,
+                      padding: const EdgeInsets.all(20),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12),
+                      itemBuilder: (context, index) => buildGrid(detail, index),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: sHeight * 0.07,
+                ),
+                Container(
+                  width: sWidth * 0.70,
+                  height: sHeight * 0.82,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      border: Border.all(
+                        color: Colors.grey.shade600,
+                      ),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
+                  padding: EdgeInsets.all(sHeight * 0.05),
+                  child: StreamBuilder(
+                      stream: vm.stream,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          print("here is result ${snapshot.data}");
+                          return PaginatedData(
+                            swidth: sWidth,
+                            formkey: _formKey,
+                            controller: searchInputController,
+                            isVisible: _isVisible,
+                            comparableData: snapshot.data,
+                            col1: "ID",
+                            col2: "First Name",
+                            col3: "Last Name",
+                            col4: "Telephone",
+                            col5: "Active",
+                          );
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      }),
+                ),
+              ],
             ),
-            DataTable(
-                //headingTextStyle: TextStyle(color: Colors.yellow),
-                columns: const <DataColumn>[
-                  DataColumn(
-                      label: Text(
-                    "noms",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    "Prenoms",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    "Contact",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    "Bien",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-                ],
-                rows: <DataRow>[
-                  DataRow.byIndex(cells: const [
-                    DataCell(Text("Mouliom")),
-                    DataCell(Text("Fitzgerald")),
-                    DataCell(Text("690462556")),
-                    DataCell(Text("Villa brown city")),
-                  ]),
-                ]),
-          ],
-        ),
+          ),
+          CustomModelWidget(
+            isVisible: _isVisible,
+          ),
+        ],
       ),
     );
   }
 
   Widget buildGrid(LessorCardDetails detail, int index) {
-    return Card(
-      //shape: ShapeBorder.lerp(a, b, t),
-      // color: Colors.grey.shade100,
-      elevation: 5,
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            detail.data()[index].icon != null
-                ? Icon(
-                    detail.data()[index].icon,
-                    size: 70,
-                  )
-                : SvgPicture.asset(
-                    detail.data()[index].otherIcon!,
-                    width: 70,
-                    height: 70,
-                  ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                " ${detail.data()[index].value}",
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey.shade700,
-                    fontWeight: FontWeight.bold),
+    return InkWell(
+      onTap: () {
+        vm.setStream();
+      },
+      child: Card(
+        //shape: ShapeBorder.lerp(a, b, t),
+        // color: Colors.grey.shade100,
+        elevation: 5,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              detail.data()[index].icon != null
+                  ? Icon(
+                      detail.data()[index].icon,
+                      size: 70,
+                    )
+                  : SvgPicture.asset(
+                      detail.data()[index].otherIcon!,
+                      width: 70,
+                      height: 70,
+                    ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  " ${detail.data()[index].value}",
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey.shade700,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              " ${detail.data()[index].name}",
-              style: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.normal),
-            ),
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                " ${detail.data()[index].name}",
+                style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -165,3 +239,7 @@ class LessorCardDetails {
             value: value4),
       ];
 }
+
+List<List<Object>> testData = <List<Object>>[
+  <Object>[1, "Nsangou Mouliom", "Fitzgerald", 690462556, "hello Nothing here"],
+];

@@ -105,9 +105,7 @@ class _AuthenticateState extends State<Authenticate>
     return Tab(
       child: Text(
         text,
-        style: const TextStyle(
-          fontFamily: "AbyssinicaSIL",
-        ),
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

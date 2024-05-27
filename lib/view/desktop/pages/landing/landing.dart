@@ -20,8 +20,8 @@ class Landing extends StatelessWidget {
           Container(
             alignment: const Alignment(0, -0.0),
             child: const SizedBox(
-              height: 450,
-              width: 450,
+              // height: 900,
+              // width: 900,
               child: Image(
                 image: AssetImage("assets/images/management.png"),
               ),

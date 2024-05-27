@@ -78,7 +78,9 @@ class _AppContentState extends State<AppContent> {
                       automaticallyImplyLeading: false,
                       backgroundColor: Colors.grey.shade400,
                     ),
-                    body: SafeArea(child: appContent[snapshot.data!.abs()]),
+                    body: Stack(children: [
+                      SafeArea(child: appContent[snapshot.data!.abs()])
+                    ]),
                   );
                 } else {
                   return const Text("Stream failed");

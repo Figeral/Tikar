@@ -17,7 +17,9 @@ class _SideBarState extends State<SideBar> {
 
   @override
   Widget build(BuildContext context) {
+    final sWidth = MediaQuery.of(context).size.width;
     return Container(
+      margin: EdgeInsets.fromLTRB(sWidth * 0.02, 0, 0, 0),
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
       color: Colors.grey.shade200,
       child: ListView.builder(
@@ -47,7 +49,7 @@ class _SideBarState extends State<SideBar> {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 15),
               child: Icon(
                 data.menu[index].icon,
                 color: isSelected ? Colors.black : Colors.grey,
