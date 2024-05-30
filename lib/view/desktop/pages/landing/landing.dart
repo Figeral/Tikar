@@ -7,7 +7,7 @@ class Landing extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
+      body: Column(
         children: [
           Container(
             alignment: const Alignment(0, -1),
@@ -30,10 +30,10 @@ class Landing extends StatelessWidget {
           Container(
             alignment: const Alignment(0, 0.5),
             child: const Text(
-              "Votre solution immobilière tout-en-un.\nGérez vos biens, locataires, employées, finances en toute simplicité.",
+              "Votre solution immobilière tout-en-un.\nGérez vos biens locataires employées finances en toute simplicité.",
               style: TextStyle(
                   fontFamily: "Poppins",
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   fontSize: 20),
               textAlign: TextAlign.center,
             ),

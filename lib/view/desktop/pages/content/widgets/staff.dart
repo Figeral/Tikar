@@ -2,22 +2,22 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tikar/vm/lessor_vm.dart';
+import 'package:tikar/vm/staff_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
 
-class Lessor extends StatefulWidget {
-  const Lessor({super.key});
+class Employee extends StatefulWidget {
+  const Employee({super.key});
 
   @override
-  State<Lessor> createState() => _LessorState();
+  State<Employee> createState() => _EmployeeState();
 }
 
-class _LessorState extends State<Lessor> {
+class _EmployeeState extends State<Employee> {
   bool _isVisible = false;
-  final vm = LessorViewModel();
+  final vm = StaffViewModel();
   TextEditingController searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -49,7 +49,7 @@ class _LessorState extends State<Lessor> {
             child: Column(
               children: <Widget>[
                 const Text(
-                  'Management  Bailleur',
+                  'Management  Employées',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -90,7 +90,7 @@ class _LessorState extends State<Lessor> {
                       ),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20))),
-                  padding: EdgeInsets.all(sHeight * 0.05),
+                  padding: EdgeInsets.all(sHeight * 0.04),
                   child: StreamBuilder(
                       stream: vm.stream,
                       builder: (context, snapshot) {
@@ -107,7 +107,7 @@ class _LessorState extends State<Lessor> {
                             col1: "ID",
                             col2: "First Name",
                             col3: "Last Name",
-                            col4: "Telephone",
+                            col4: "Role",
                             col5: "Active",
                             visibility: (bool isVisible) {
                               setState(() {
@@ -151,7 +151,7 @@ class _LessorState extends State<Lessor> {
                 : SvgPicture.asset(
                     detail.data()[index].otherIcon!,
                     width: 70,
-                    height: 70,
+                    //  color: AppColors.nightBue,
                   ),
             Padding(
               padding: const EdgeInsets.all(10),
@@ -189,23 +189,22 @@ class LessorCardDetails {
       required this.value4});
   List<CardModel> data() => <CardModel>[
         CardModel(
-            //otherIcon: "assets/images/house_fill.svg",
-            icon: Icons.manage_accounts_outlined,
-            name: "Bailleur Actif",
+            otherIcon: "assets/images/4.svg",
+            name: "Employéé Actif",
             value: value1),
         CardModel(
-          icon: Icons.man,
-          name: "Bailleur Total",
+          otherIcon: "assets/images/6.svg",
+          name: "Employéé Total",
           value: value2,
         ),
         CardModel(
-            otherIcon: "assets/images/1.svg",
-            name: "Au Cameroun",
+            otherIcon: "assets/images/7.svg",
+            name: "Employéé Interne",
             value: value3),
         CardModel(
             // otherIcon: "assets/images/building.svg",
-            icon: Icons.rocket_launch_outlined,
-            name: "à l'étranger",
+            otherIcon: "assets/images/8.svg",
+            name: "Employéé Externe",
             value: value4),
       ];
 }

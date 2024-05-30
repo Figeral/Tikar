@@ -1,13 +1,13 @@
 import 'dart:ffi';
 import 'dart:typed_data';
 
-class LessorModel {
+class RentModel {
   int id;
   String fname, lname;
   int tel;
   bool isActive;
   Uint8List? image;
-  LessorModel(
+  RentModel(
       {required this.id,
       required this.fname,
       required this.lname,
@@ -15,8 +15,8 @@ class LessorModel {
       required this.isActive,
       required this.image});
   get element => [id, fname, lname, tel, isActive, image];
-  factory LessorModel.fromJson(Map<String, dynamic> json) {
-    return LessorModel(
+  factory RentModel.fromJson(Map<String, dynamic> json) {
+    return RentModel(
       id: json['id'],
       fname: json['fname'],
       lname: json['lname'],

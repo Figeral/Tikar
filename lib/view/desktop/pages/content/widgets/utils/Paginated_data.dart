@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/utils/data_source.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/data_source_parents.dart';
 
 class PaginatedData extends StatefulWidget {
   void Function() refresh;
@@ -31,11 +31,11 @@ class PaginatedData extends StatefulWidget {
 }
 
 class _PaginatedDataState extends State<PaginatedData> {
-  bool _isVisible = false;
+  bool _isVisible = true;
   @override
   void initState() {
-    widget.refresh();
     super.initState();
+    //widget.refresh();
   }
 
   @override
@@ -43,7 +43,7 @@ class _PaginatedDataState extends State<PaginatedData> {
     // widget.refresh();
     return PaginatedDataTable(
         header: Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, widget.swidth * 0.50, 0),
+          padding: EdgeInsets.fromLTRB(0, 0, widget.swidth * 0.47, 0),
           child: Form(
             key: widget.formkey,
             child: TextFormField(
@@ -69,13 +69,17 @@ class _PaginatedDataState extends State<PaginatedData> {
               tooltip: "press here to open and close",
               onPressed: () {
                 setState(() {
-                  if (_isVisible == true) {
-                    widget.visibility(_isVisible);
-                    _isVisible = false;
-                  } else {
-                    widget.visibility(_isVisible);
-                  }
+                  // if (_isVisible == true) {
+                  //   widget.visibility(_isVisible);
+                  //   _isVisible = false;
+                  // } else {
+                  //   widget.visibility(_isVisible);
+                  //   _isVisible = false;
+                  // }
+                  widget.visibility(_isVisible);
+                  _isVisible = !_isVisible;
                 });
+                print("visible from PaginatedTable: $_isVisible");
               },
               icon: const Icon(Icons.add)),
           IconButton(

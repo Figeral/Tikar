@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'dart:typed_data';
 import "package:http/http.dart" as http;
 import 'package:tikar/model/server/server_info.dart';
+import 'package:tikar/model/data-models/renter_model.dart';
 import 'package:tikar/model/data-models/lessor_model.dart';
 
-class LessorViewModel {
-  final _url = ServerData(sourceUrl: "lessors").path;
+class RenterViewModel {
+  final _url = ServerData(sourceUrl: "renters").path;
   get url => _url;
-  Future<List<dynamic>> getLessor() async {
+  Future<List<dynamic>> getRenters() async {
     final response = await http.get(Uri.parse(url));
     final result = json.decode(response.body);
     //print(result);
@@ -19,10 +20,10 @@ class LessorViewModel {
   Stream get stream => _streamController.stream;
 
   void setStream() async {
-    List result = await getLessor();
-    List<LessorModel> data = [];
+    List result = await getRenters();
+    List<RenterModel> data = [];
     result.forEach((element) {
-      data.add(LessorModel.fromJson(element));
+      data.add(RenterModel.fromJson(element));
     });
     List<List<Object>> comparableData = [];
     comparableData = data
@@ -36,6 +37,6 @@ class LessorViewModel {
             ])
         .toList();
     _streamController.add(comparableData);
-    //print(await getLessor());
+    //print(await getRenters());
   }
 }

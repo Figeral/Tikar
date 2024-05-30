@@ -2,50 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomModelWidget extends StatefulWidget {
-  bool visibility;
-
-  CustomModelWidget({required this.visibility});
+  const CustomModelWidget({super.key});
   @override
   _CustomModelWidgetState createState() => _CustomModelWidgetState();
 }
 
 class _CustomModelWidgetState extends State<CustomModelWidget> {
-  late bool _isVisible;
-  // @override
-  // void didUpdateWidget(covariant CustomModelWidget oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
-  //   if (widget.isVisible != oldWidget.isVisible) {
-  //     _isVisible = widget.isVisible;
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   _isVisible = widget.isVisible;
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: widget.visibility,
-      child: Positioned(
-        left: 250,
-        top: 150,
-        child: SizedBox(
-          width: 700,
-          height: 800,
-          child: Card(
-            color: Colors.grey.shade300,
-            child: Center(
-                child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        _isVisible = false;
-                      });
-                    },
-                    child: Text("hello bro , custom modal"))),
-          ),
+    return Positioned(
+      left: 250,
+      top: 50,
+      child: SizedBox(
+        width: 700,
+        height: 800,
+        child: Card(
+          color: Colors.grey.shade300,
+          child: Center(
+              child: InkWell(
+                  onTap: () {
+                    print("visible from custom modal :");
+                  },
+                  child: Text("hello bro , custom modal"))),
         ),
       ),
     );

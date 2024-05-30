@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/vm/sidebar_vm.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/rent.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/staff.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/assets.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/lessor.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/renter.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/Employee.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/location.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/dashboard.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/side_bar_menu.dart';
 
@@ -61,10 +61,6 @@ class _AppContentState extends State<AppContent> {
                 ],
               ),
             ),
-          ),
-          const Divider(
-            thickness: 3,
-            color: Colors.red,
           ),
           Expanded(
             flex: 10,

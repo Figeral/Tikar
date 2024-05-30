@@ -38,7 +38,7 @@ class _SideBarState extends State<SideBar> {
         borderRadius: const BorderRadius.all(
           Radius.circular(6.0),
         ),
-        color: isSelected ? AppColors.pButton : Colors.transparent,
+        color: isSelected ? AppColors.nightBue : Colors.transparent,
       ),
       child: InkWell(
         onTap: () => setState(() {

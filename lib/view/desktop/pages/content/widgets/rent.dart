@@ -8,14 +8,14 @@ import 'package:tikar/model/app-model/card_model.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
 
-class Lessor extends StatefulWidget {
-  const Lessor({super.key});
+class Location extends StatefulWidget {
+  const Location({super.key});
 
   @override
-  State<Lessor> createState() => _LessorState();
+  State<Location> createState() => _LocationState();
 }
 
-class _LessorState extends State<Lessor> {
+class _LocationState extends State<Location> {
   bool _isVisible = false;
   final vm = LessorViewModel();
   TextEditingController searchInputController = TextEditingController();
@@ -90,7 +90,7 @@ class _LessorState extends State<Lessor> {
                       ),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20))),
-                  padding: EdgeInsets.all(sHeight * 0.05),
+                  padding: EdgeInsets.all(sHeight * 0.04),
                   child: StreamBuilder(
                       stream: vm.stream,
                       builder: (context, snapshot) {
@@ -199,7 +199,7 @@ class LessorCardDetails {
           value: value2,
         ),
         CardModel(
-            otherIcon: "assets/images/1.svg",
+            otherIcon: "assets/images/1_fill.svg",
             name: "Au Cameroun",
             value: value3),
         CardModel(
