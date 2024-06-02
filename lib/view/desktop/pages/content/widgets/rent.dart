@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:tikar/vm/rent_vm.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tikar/vm/lessor_vm.dart';
 import '../../../../../constants/app_colors.dart';
@@ -15,18 +16,25 @@ class Location extends StatefulWidget {
   State<Location> createState() => _LocationState();
 }
 
+int tR = 0;
+
 class _LocationState extends State<Location> {
   bool _isVisible = false;
-  final vm = LessorViewModel();
+  final vm = RentViewModel();
   TextEditingController searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  LessorCardDetails detail =
-      LessorCardDetails(value1: 16, value2: 37, value3: 12, value4: 23);
+  RentCardDetails detail =
+      RentCardDetails(value1: 16, value2: tR, value3: 12, value4: 23);
   @override
   void initState() {
     super.initState();
     vm.setStream();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
   }
 
   @override
@@ -49,10 +57,11 @@ class _LocationState extends State<Location> {
             child: Column(
               children: <Widget>[
                 const Text(
-                  'Management  Bailleur',
+                  'Management  Locations',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
+                    color: AppColors.golden,
                   ),
                 ),
                 const SizedBox(
@@ -96,28 +105,43 @@ class _LocationState extends State<Location> {
                       builder: (context, snapshot) {
                         vm.setStream;
                         if (snapshot.hasData) {
-                          print("here is result ${snapshot.data}");
-                          return PaginatedData(
+                          return PaginatedDataParent(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
-                            // isVisible: _isVisible,
                             comparableData: snapshot.data,
-                            col1: "ID",
-                            col2: "First Name",
-                            col3: "Last Name",
-                            col4: "Telephone",
-                            col5: "Active",
+                            col1: "Type",
+                            col2: "Renter",
+                            col3: "Cost",
+                            col4: "StartAt",
+                            col5: "EndAt",
+                            col6: "Active",
                             visibility: (bool isVisible) {
                               setState(() {
                                 _isVisible = isVisible;
                               });
-                              print("visible from lessor: $_isVisible");
                             },
                           );
                         } else {
-                          return const CircularProgressIndicator();
+                          return PaginatedDataParent(
+                            refresh: vm.setStream,
+                            swidth: sWidth,
+                            formkey: _formKey,
+                            controller: searchInputController,
+                            comparableData: [],
+                            col1: "Type",
+                            col2: "Renter",
+                            col3: "Cost",
+                            col4: "StartAt",
+                            col5: "EndAt",
+                            col6: "Active",
+                            visibility: (bool isVisible) {
+                              setState(() {
+                                _isVisible = isVisible;
+                              });
+                            },
+                          );
                         }
                       }),
                 ),
@@ -133,7 +157,7 @@ class _LocationState extends State<Location> {
     );
   }
 
-  Widget buildGrid(LessorCardDetails detail, int index) {
+  Widget buildGrid(RentCardDetails detail, int index) {
     return Card(
       //shape: ShapeBorder.lerp(a, b, t),
       // color: Colors.grey.shade100,
@@ -157,7 +181,7 @@ class _LocationState extends State<Location> {
               padding: const EdgeInsets.all(10),
               child: Text(
                 " ${detail.data()[index].value}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     color: AppColors.golden,
                     fontWeight: FontWeight.bold),
@@ -168,10 +192,7 @@ class _LocationState extends State<Location> {
             ),
             Text(
               " ${detail.data()[index].name}",
-              style: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -180,9 +201,9 @@ class _LocationState extends State<Location> {
   }
 }
 
-class LessorCardDetails {
+class RentCardDetails {
   int value1, value2, value3, value4;
-  LessorCardDetails(
+  RentCardDetails(
       {required this.value1,
       required this.value2,
       required this.value3,
@@ -191,21 +212,21 @@ class LessorCardDetails {
         CardModel(
             //otherIcon: "assets/images/house_fill.svg",
             icon: Icons.manage_accounts_outlined,
-            name: "Bailleur Actif",
+            name: "Location en cour",
             value: value1),
         CardModel(
           icon: Icons.man,
-          name: "Bailleur Total",
+          name: "Location Total",
           value: value2,
         ),
         CardModel(
             otherIcon: "assets/images/1_fill.svg",
-            name: "Au Cameroun",
+            name: "D'appartent et Autre",
             value: value3),
         CardModel(
             // otherIcon: "assets/images/building.svg",
             icon: Icons.rocket_launch_outlined,
-            name: "à l'étranger",
+            name: "De Résidence et Maison",
             value: value4),
       ];
 }

@@ -1,12 +1,9 @@
 import 'utils/custom_modals.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-import 'package:tikar/vm/lessor_vm.dart';
+import 'package:tikar/vm/asset_vm.dart';
+import 'package:tikar/constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/lessor.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
 
 class Assets extends StatefulWidget {
@@ -18,16 +15,16 @@ class Assets extends StatefulWidget {
 
 class _AssetsState extends State<Assets> {
   bool _isVisible = false;
-  final vm = LessorViewModel();
+  final vm = AssetViewModel();
   TextEditingController searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  AssetCardDetails detail =
-      AssetCardDetails(value1: 16, value2: 37, value3: 12, value4: 23);
+  AssetCardDetails? detail;
   @override
   void initState() {
     super.initState();
     vm.setStream();
+    detail = AssetCardDetails(value1: 08, value2: 18, value3: 12, value4: 23);
   }
 
   @override
@@ -50,10 +47,11 @@ class _AssetsState extends State<Assets> {
             child: Column(
               children: <Widget>[
                 const Text(
-                  'Management  Bailleur',
+                  'Management  Immobilier',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
+                    color: AppColors.golden,
                   ),
                 ),
                 const SizedBox(
@@ -74,7 +72,8 @@ class _AssetsState extends State<Assets> {
                               crossAxisCount: 4,
                               crossAxisSpacing: 12,
                               mainAxisSpacing: 12),
-                      itemBuilder: (context, index) => buildGrid(detail, index),
+                      itemBuilder: (context, index) =>
+                          buildGrid(detail!, index),
                     ),
                   ),
                 ),
@@ -97,28 +96,45 @@ class _AssetsState extends State<Assets> {
                       builder: (context, snapshot) {
                         vm.setStream;
                         if (snapshot.hasData) {
-                          print("here is result ${snapshot.data}");
-                          return PaginatedData(
+                          return PaginatedDataParent(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
                             // isVisible: _isVisible,
                             comparableData: snapshot.data,
-                            col1: "ID",
-                            col2: "First Name",
-                            col3: "Last Name",
-                            col4: "Telephone",
-                            col5: "Active",
+                            col1: "Type",
+                            col2: "Lessor",
+                            col3: "Surface Area /M²",
+                            col4: "Estimated Value /Millions",
+                            col5: "Matricule",
+                            col6: "Active",
                             visibility: (bool isVisible) {
                               setState(() {
                                 _isVisible = isVisible;
                               });
-                              print("visible from lessor: $_isVisible");
                             },
                           );
                         } else {
-                          return const CircularProgressIndicator();
+                          return PaginatedDataParent(
+                            refresh: vm.setStream,
+                            swidth: sWidth,
+                            formkey: _formKey,
+                            controller: searchInputController,
+                            // isVisible: _isVisible,
+                            comparableData: [],
+                            col1: "Type",
+                            col2: "Lessor",
+                            col3: "Surface Area /M²",
+                            col4: "Estimated Value /Millions",
+                            col5: "Matricule",
+                            col6: "Active",
+                            visibility: (bool isVisible) {
+                              setState(() {
+                                _isVisible = isVisible;
+                              });
+                            },
+                          );
                         }
                       }),
                 ),
@@ -158,7 +174,7 @@ class _AssetsState extends State<Assets> {
                 " ${detail.data()[index].value}",
                 style: TextStyle(
                     fontSize: 18,
-                    color: Colors.grey.shade700,
+                    color: AppColors.golden,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -189,11 +205,11 @@ class AssetCardDetails {
   List<CardModel> data() => <CardModel>[
         CardModel(
             otherIcon: "assets/images/house_fill.svg",
-            name: "Locataires Actif",
+            name: "Biens Actif",
             value: value1),
         CardModel(
           icon: Icons.home_work,
-          name: "Locataires Total",
+          name: "Bien Total",
           value: value2,
         ),
         CardModel(

@@ -1,28 +1,38 @@
 import 'dart:ffi';
-import 'dart:typed_data';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:tikar/model/data-models/asset_model.dart';
+import 'package:tikar/model/data-models/renter_model.dart';
 
 class RentModel {
   int id;
-  String fname, lname;
-  int tel;
-  bool isActive;
-  Uint8List? image;
+  DateTime? startAt, endAt;
+
+  AssetModel? asset;
+  // BasementModel? basement;
+  RenterModel renter;
+  bool active;
+  int cost;
   RentModel(
       {required this.id,
-      required this.fname,
-      required this.lname,
-      required this.tel,
-      required this.isActive,
-      required this.image});
-  get element => [id, fname, lname, tel, isActive, image];
+      required this.startAt,
+      required this.endAt,
+      required this.asset,
+      // required this.basement,
+      required this.renter,
+      required this.active,
+      required this.cost});
+
   factory RentModel.fromJson(Map<String, dynamic> json) {
+    //print(AssetModel.fromJson(Map.from(json['asset'])).lessor!.fname);
     return RentModel(
       id: json['id'],
-      fname: json['fname'],
-      lname: json['lname'],
-      tel: json['tel'],
-      image: json['picture'],
-      isActive: json['active'],
+      startAt: json['startAt'],
+      endAt: json['endAt'],
+      asset: AssetModel.fromJson(Map.from(json['asset'])),
+      // basement: BasementModel.fromJson(json['asset']),
+      renter: RenterModel.fromJson(json['renter']),
+      active: json['active'],
+      cost: json['cost'],
     );
   }
 }

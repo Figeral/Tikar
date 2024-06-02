@@ -96,13 +96,11 @@ class _LessorState extends State<Lessor> {
                       builder: (context, snapshot) {
                         vm.setStream;
                         if (snapshot.hasData) {
-                          print("here is result ${snapshot.data}");
                           return PaginatedData(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
-                            // isVisible: _isVisible,
                             comparableData: snapshot.data,
                             col1: "ID",
                             col2: "First Name",
@@ -113,11 +111,26 @@ class _LessorState extends State<Lessor> {
                               setState(() {
                                 _isVisible = isVisible;
                               });
-                              print("visible from lessor: $_isVisible");
                             },
                           );
                         } else {
-                          return const CircularProgressIndicator();
+                          return PaginatedData(
+                            refresh: vm.setStream,
+                            swidth: sWidth,
+                            formkey: _formKey,
+                            controller: searchInputController,
+                            comparableData: [],
+                            col1: "ID",
+                            col2: "First Name",
+                            col3: "Last Name",
+                            col4: "Telephone",
+                            col5: "Active",
+                            visibility: (bool isVisible) {
+                              setState(() {
+                                _isVisible = isVisible;
+                              });
+                            },
+                          );
                         }
                       }),
                 ),

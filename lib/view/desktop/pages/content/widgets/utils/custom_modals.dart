@@ -25,10 +25,7 @@ class _CustomModelWidgetState extends State<CustomModelWidget> {
           color: Colors.grey.shade300,
           child: Center(
               child: InkWell(
-                  onTap: () {
-                    print("visible from custom modal :");
-                  },
-                  child: Text("hello bro , custom modal"))),
+                  onTap: () {}, child: Text("hello bro , custom modal"))),
         ),
       ),
     );

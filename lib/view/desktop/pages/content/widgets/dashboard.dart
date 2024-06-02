@@ -10,8 +10,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green,
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          "Dashboard",
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }

@@ -16,15 +16,17 @@ class Employee extends StatefulWidget {
 }
 
 class _EmployeeState extends State<Employee> {
+  List<List<Object>> emp = [];
+  int Et = 0;
   bool _isVisible = false;
   final vm = StaffViewModel();
   TextEditingController searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  LessorCardDetails detail =
-      LessorCardDetails(value1: 16, value2: 37, value3: 12, value4: 23);
+  late LessorCardDetails detail;
   @override
   void initState() {
+    detail = LessorCardDetails(value1: Et, value2: 21, value3: 12, value4: 23);
     super.initState();
     vm.setStream();
   }
@@ -52,6 +54,7 @@ class _EmployeeState extends State<Employee> {
                   'Management  Employées',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    color: AppColors.nightBue,
                     fontSize: 25,
                   ),
                 ),
@@ -90,19 +93,17 @@ class _EmployeeState extends State<Employee> {
                       ),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20))),
-                  padding: EdgeInsets.all(sHeight * 0.04),
+                  padding: EdgeInsets.all(sHeight * 0.05),
                   child: StreamBuilder(
                       stream: vm.stream,
                       builder: (context, snapshot) {
                         vm.setStream;
                         if (snapshot.hasData) {
-                          print("here is result ${snapshot.data}");
                           return PaginatedData(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
-                            // isVisible: _isVisible,
                             comparableData: snapshot.data,
                             col1: "ID",
                             col2: "First Name",
@@ -112,12 +113,29 @@ class _EmployeeState extends State<Employee> {
                             visibility: (bool isVisible) {
                               setState(() {
                                 _isVisible = isVisible;
+                                // emp = snapshot.data;
+                                // Et = emp.length;
                               });
-                              print("visible from lessor: $_isVisible");
                             },
                           );
                         } else {
-                          return const CircularProgressIndicator();
+                          return PaginatedData(
+                            refresh: vm.setStream,
+                            swidth: sWidth,
+                            formkey: _formKey,
+                            controller: searchInputController,
+                            comparableData: [],
+                            col1: "ID",
+                            col2: "First Name",
+                            col3: "Last Name",
+                            col4: "Telephone",
+                            col5: "Active",
+                            visibility: (bool isVisible) {
+                              setState(() {
+                                _isVisible = isVisible;
+                              });
+                            },
+                          );
                         }
                       }),
                 ),
@@ -134,46 +152,51 @@ class _EmployeeState extends State<Employee> {
   }
 
   Widget buildGrid(LessorCardDetails detail, int index) {
-    return Card(
-      //shape: ShapeBorder.lerp(a, b, t),
-      // color: Colors.grey.shade100,
-      elevation: 5,
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            detail.data()[index].icon != null
-                ? Icon(
-                    detail.data()[index].icon,
-                    size: 70,
-                  )
-                : SvgPicture.asset(
-                    detail.data()[index].otherIcon!,
-                    width: 70,
-                    //  color: AppColors.nightBue,
-                  ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                " ${detail.data()[index].value}",
-                style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.golden,
-                    fontWeight: FontWeight.bold),
+    return Tooltip(
+      showDuration: const Duration(seconds: 10),
+      verticalOffset: 48,
+      preferBelow: false,
+      message:
+          "Nous comptons ${detail.data()[index].value}  ${detail.data()[index].name} ",
+      child: Card(
+        elevation: 5,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              detail.data()[index].icon != null
+                  ? Icon(
+                      detail.data()[index].icon,
+                      size: 70,
+                    )
+                  : SvgPicture.asset(
+                      detail.data()[index].otherIcon!,
+                      width: 70,
+                      //  color: AppColors.nightBue,
+                    ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  " ${detail.data()[index].value}",
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.golden,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              " ${detail.data()[index].name}",
-              style: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                " ${detail.data()[index].name}",
+                style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
         ),
       ),
     );
