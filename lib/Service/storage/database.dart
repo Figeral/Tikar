@@ -9,12 +9,14 @@ class DbProvider {
   static final DbProvider _instance = DbProvider._internal();
   factory DbProvider() => _instance;
   DbProvider._internal();
-  late Database _tikarDb;
+
   Future<Database> get tikarDb async {
-    return _tikarDb = await _init();
+    print(" in the tikardb getter");
+    return await _init();
   }
 
   Future<void> createTables(Database db) async {
+    print("In the create method");
     String schema = '''
                     create table asset (is_active bit not null, added_by bigint, estimated_value bigint not null, id bigint not null, lessor_id bigint, matricule bigint, surface_area bigint not null, address varchar(255), asset_type varchar(255), description varchar(255), name varchar(255), ville varchar(255), image tinyblob, primary key (id)) engine=InnoDB;
 create table basement (is_active bit not null, added_by bigint, building_id bigint, estimated_value bigint not null, id bigint not null, lessor_id bigint, matricule bigint, number_of_halls bigint not null, surface_area bigint not null, address varchar(255), asset_type varchar(255), description varchar(255), name varchar(255), type varchar(255), ville varchar(255), image tinyblob, primary key (id)) engine=InnoDB;
@@ -54,14 +56,17 @@ alter table residence add constraint FK_lu53jtw5wts0i9ymxi5afohuy foreign key (l
   }
 
   Future<Database> _init() async {
+    print(" in the _init method");
     databaseFactory = databaseFactoryFfi;
-    return openDatabase(
+    return await openDatabase(
       await dbPath("tikar.db"),
       version: 1,
-      onCreate: (db, version) => _onCreate(db, version),
+      onCreate: (db, version) async => await _onCreate(db, version),
     );
   }
 
-  Future<void> _onCreate(Database db, int? version) async =>
-      await createTables(db);
+  Future _onCreate(Database db, int? version) async {
+    print('inside oncreate');
+    await createTables(db);
+  }
 }

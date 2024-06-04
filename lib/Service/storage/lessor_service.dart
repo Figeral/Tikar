@@ -6,7 +6,7 @@ import 'package:tikar/Service/storage/database.dart';
 class LessorDbProvider {
   Future<void> saveAll(List<dynamic> data) async {
     final db = await DbProvider().tikarDb;
-
+    print(" in the SaveAll method");
     for (var item in data) {
       // Convert boolean values to integers
       final Map<String, dynamic> itemWithIntValues = {};
