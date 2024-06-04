@@ -44,7 +44,9 @@ class AssetModel {
       lessor:
           json["lessor"] != null ? LessorModel.fromJson(json['lessor']) : null,
       addedBy: StaffModel.fromJson(json['addedBy']),
-      //  basements: [BasementModel.fromJson(json['basement'])],
+      // basements: (json['basements'] as List<dynamic>?)
+      //     ?.map((e) => BasementModel.fromJson(e))
+      //     .toList(),
       matricule: json['matricule'],
       surfaceArea: json['surfaceArea'],
       estimatedValue: json['estimatedValue'],
@@ -64,8 +66,9 @@ class AssetModel {
 
 class BasementModel {
   int id;
-  LessorModel? lessor;
+  // LessorModel? lessor;
   StaffModel addedBy;
+  AssetModel building;
   String? description;
   int surfaceArea;
   int estimatedValue;
@@ -77,7 +80,8 @@ class BasementModel {
   BasementModel(
       {required this.id,
       required this.addedBy,
-      required this.lessor,
+      required this.building,
+      // required this.lessor,
       required this.description,
       required this.surfaceArea,
       required this.estimatedValue,
@@ -90,7 +94,8 @@ class BasementModel {
     return BasementModel(
         id: json['id'],
         addedBy: StaffModel.fromJson(json["addedBy"]),
-        lessor: LessorModel.fromJson(json['lessor']),
+        building: AssetModel.fromJson(json['building']),
+        //lessor: LessorModel.fromJson(json['lessor']),
         description: json['description'],
         surfaceArea: json["surfaceArea"],
         estimatedValue: json["estimatedValue"],

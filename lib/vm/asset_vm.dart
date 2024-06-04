@@ -3,16 +3,18 @@ import 'dart:convert';
 import 'dart:typed_data';
 import "package:http/http.dart" as http;
 import 'package:tikar/model/server/server_info.dart';
+import 'package:tikar/Service/storage/asset_service.dart';
 import 'package:tikar/model/data-models/asset_model.dart';
 
 class AssetViewModel {
+  AssetDbProvider localStorage = AssetDbProvider();
   int len = 0;
   final _url = ServerData(sourceUrl: "assets/parent").path;
   get url => _url;
   Future<List<dynamic>> getAsset() async {
     final response = await http.get(Uri.parse(url));
     final result = json.decode(response.body);
-
+    print(result);
     return result as List;
   }
 
@@ -20,7 +22,10 @@ class AssetViewModel {
   Stream get stream => _streamController.stream;
 
   void setStream() async {
-    List result = await getAsset();
+    //List result = await getAsset();
+    await localStorage.saveAll(await getAsset());
+    List result = await localStorage.readAllItems();
+    print("result from asset local storage : $result");
     List<AssetModel> data = [];
     result.forEach((element) {
       data.add(AssetModel.fromJson(element));

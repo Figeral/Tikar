@@ -6,7 +6,6 @@ import 'package:tikar/model/app-model/card_model.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
 
-
 class Location extends StatefulWidget {
   const Location({super.key});
 
@@ -112,7 +111,7 @@ class _LocationState extends State<Location> {
                             comparableData: snapshot.data,
                             col1: "Type",
                             col2: "Renter",
-                            col3: "Cost",
+                            col3: "Cost / fcfa",
                             col4: "StartAt",
                             col5: "EndAt",
                             col6: "Active",

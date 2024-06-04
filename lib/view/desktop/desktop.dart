@@ -20,7 +20,6 @@ class _DesktopState extends State<Desktop> {
   bool rightTap = true;
   @override
   Widget build(BuildContext context) {
-    int _pageIndex = 0;
     final sWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.purple.shade700,

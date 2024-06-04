@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'dart:typed_data';
 import "package:http/http.dart" as http;
 import 'package:tikar/model/server/server_info.dart';
+import 'package:tikar/Service/storage/lessor_service.dart';
 import 'package:tikar/model/data-models/lessor_model.dart';
 
 class LessorViewModel {
+  LessorDbProvider localStorage = LessorDbProvider();
   final _url = ServerData(sourceUrl: "lessors").path;
   get url => _url;
   Future<List<dynamic>> getLessor() async {
@@ -19,7 +21,9 @@ class LessorViewModel {
   Stream get stream => _streamController.stream;
 
   void setStream() async {
-    List result = await getLessor();
+    //List result = await getLessor();
+    await localStorage.saveAll(await getLessor());
+    List result = await localStorage.readAllItems();
     List<LessorModel> data = [];
     result.forEach((element) {
       data.add(LessorModel.fromJson(element));

@@ -98,6 +98,7 @@ class _AssetsState extends State<Assets> {
                         ;
                         vm.setStream;
                         if (snapshot.hasData) {
+                          print((snapshot.data as List<dynamic>).length);
                           return PaginatedDataParent(
                             refresh: vm.setStream,
                             swidth: sWidth,

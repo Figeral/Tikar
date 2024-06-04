@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import "package:http/http.dart" as http;
 import 'package:tikar/model/server/server_info.dart';
 import 'package:tikar/model/data-models/rent_model.dart';
-import 'package:tikar/model/data-models/asset_model.dart';
 
 class RentViewModel {
   int len = 0;
