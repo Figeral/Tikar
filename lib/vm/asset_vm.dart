@@ -22,9 +22,9 @@ class AssetViewModel {
   Stream get stream => _streamController.stream;
 
   void setStream() async {
-    //List result = await getAsset();
-    await localStorage.saveAll(await getAsset());
-    List result = await localStorage.readAllItems();
+    List result = await getAsset();
+    // await localStorage.saveAll(await getAsset());
+    // List result = await localStorage.readAllItems();
     print("result from asset local storage : $result");
     List<AssetModel> data = [];
     result.forEach((element) {

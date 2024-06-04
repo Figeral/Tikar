@@ -21,9 +21,9 @@ class LessorViewModel {
   Stream get stream => _streamController.stream;
 
   void setStream() async {
-    //List result = await getLessor();
-    await localStorage.saveAll(await getLessor());
-    List result = await localStorage.readAllItems();
+    List result = await getLessor();
+    // await localStorage.saveAll(await getLessor());
+    // List result = await localStorage.readAllItems();
     List<LessorModel> data = [];
     result.forEach((element) {
       data.add(LessorModel.fromJson(element));

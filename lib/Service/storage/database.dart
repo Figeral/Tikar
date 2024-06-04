@@ -50,18 +50,24 @@ alter table residence add constraint FK_lu53jtw5wts0i9ymxi5afohuy foreign key (l
   }
 
   Future<String> dbPath(String dbName) async {
+    print('inside  db part');
     Directory dbUrl = await getApplicationSupportDirectory();
     String path = join(dbUrl.path, dbName);
     return path;
   }
 
+  ///Error upon the the open database method and will come back too later.
+  ///[ERROR:flutter/runtime/dart_vm_initializer.cc(41)] Unhandled Exception: SqfliteFfiException(sqlite_error: 1, , SqliteException(1): while preparing statement, no such table: lessor, SQL logic error (code 1)
+  ///Causing statement: INSERT OR REPLACE INTO lessor (id, fname, lname, tel, picture, active) VALUES (?, ?, ?, ?, NULL, ?)}) DatabaseException(SqliteException(1): while preparing statement, no such table: lessor, SQL logic error (code 1)
+  //Causing statement: INSERT OR REPLACE INTO lessor (id, fname, lname, tel, picture, active) VALUES (?, ?, ?, ?, NULL, ?)) sql 'INSERT OR REPLACE INTO lessor (id, fname, lname, tel, picture, active) VALUES (?, ?, ?, ?, NULL, ?)' args [1, Emmauel, Fitzgerard, 690462556, 1] {details: {database: {path: /home/fitzgerard/.local/share/tikar/tikar.db, id: 1, readOnly: false, singleInstance: true}}}
+
   Future<Database> _init() async {
     print(" in the _init method");
-    databaseFactory = databaseFactoryFfi;
+    //databaseFactory = databaseFactoryFfi;
     return await openDatabase(
       await dbPath("tikar.db"),
       version: 1,
-      onCreate: (db, version) async => await _onCreate(db, version),
+      onCreate: _onCreate,
     );
   }
 
