@@ -55,4 +55,6 @@ class RentViewModel {
 
     _streamController.add(comparableData);
   }
+
+  void close() => _streamController.close();
 }

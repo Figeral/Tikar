@@ -52,6 +52,9 @@ class AssetViewModel {
               model.numberOfFloors ?? 0000,
             ])
         .toList();
+
     _streamController.add(comparableData);
   }
+
+  void close() => _streamController.close();
 }

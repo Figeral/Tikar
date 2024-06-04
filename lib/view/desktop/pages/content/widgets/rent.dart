@@ -1,13 +1,11 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:tikar/vm/rent_vm.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:tikar/vm/lessor_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
+
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -40,6 +38,7 @@ class _LocationState extends State<Location> {
   @override
   void dispose() {
     searchInputController.dispose();
+    vm.close();
     super.dispose();
   }
 

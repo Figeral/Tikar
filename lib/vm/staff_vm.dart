@@ -38,4 +38,6 @@ class StaffViewModel {
     _streamController.add(comparableData);
     //print(await getRenters());
   }
+
+  void close() => _streamController.close();
 }

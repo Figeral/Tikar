@@ -1,13 +1,17 @@
-import 'dart:ffi';
 import 'dart:typed_data';
+import 'package:json_annotation/json_annotation.dart';
 
+
+@JsonSerializable()
 class StaffModel {
   int id;
   String fname, lname;
   int tel;
   bool isActive;
+
   Uint8List? image;
   String role;
+
   StaffModel(
       {required this.id,
       required this.fname,

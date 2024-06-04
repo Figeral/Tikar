@@ -34,6 +34,7 @@ class _EmployeeState extends State<Employee> {
   @override
   void dispose() {
     searchInputController.dispose();
+    vm.close();
     super.dispose();
   }
 

@@ -32,6 +32,7 @@ class _RenterState extends State<Renter> {
   @override
   void dispose() {
     searchInputController.dispose();
+    vm.close();
     super.dispose();
   }
 

@@ -38,4 +38,6 @@ class LessorViewModel {
     _streamController.add(comparableData);
     //print(await getLessor());
   }
+
+  void close() => _streamController.close();
 }

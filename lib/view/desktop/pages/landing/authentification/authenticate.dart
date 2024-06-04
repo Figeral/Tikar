@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tikar/view/desktop/pages/landing/authentification/pages/login.dart';
-import 'package:tikar/view/desktop/pages/landing/authentification/pages/signin.dart';
+import 'package:tikar/view/desktop/pages/landing/authentification/login.dart';
+import 'package:tikar/view/desktop/pages/landing/authentification/signin.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({super.key});

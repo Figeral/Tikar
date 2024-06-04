@@ -30,6 +30,7 @@ class _AssetsState extends State<Assets> {
   @override
   void dispose() {
     searchInputController.dispose();
+    vm.close();
     super.dispose();
   }
 
@@ -94,6 +95,7 @@ class _AssetsState extends State<Assets> {
                   child: StreamBuilder(
                       stream: vm.stream,
                       builder: (context, snapshot) {
+                        ;
                         vm.setStream;
                         if (snapshot.hasData) {
                           return PaginatedDataParent(

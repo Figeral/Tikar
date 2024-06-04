@@ -1,20 +1,23 @@
-import 'dart:ffi';
 import 'dart:typed_data';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:tikar/model/data-models/staff_model.dart';
 import 'package:tikar/model/data-models/lessor_model.dart';
 
+@JsonSerializable()
 class AssetModel {
   int id;
   LessorModel? lessor;
   StaffModel addedBy;
-  //List<BasementModel?> basements;
+  // List<BasementModel>? basements;
   int? numberOfFloors, numberOfHalls;
   int surfaceArea, estimatedValue;
   int? matricule;
   String? name, address, ville, description;
   String assetType;
+
   Uint8List? image;
   bool isActive;
+
   String? type;
   AssetModel({
     required this.id,
@@ -41,7 +44,7 @@ class AssetModel {
       lessor:
           json["lessor"] != null ? LessorModel.fromJson(json['lessor']) : null,
       addedBy: StaffModel.fromJson(json['addedBy']),
-      // basements: [BasementModel.fromJson(json['basement'])],
+      //  basements: [BasementModel.fromJson(json['basement'])],
       matricule: json['matricule'],
       surfaceArea: json['surfaceArea'],
       estimatedValue: json['estimatedValue'],
