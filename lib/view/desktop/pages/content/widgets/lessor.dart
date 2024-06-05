@@ -1,7 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:tikar/vm/lessor_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
@@ -138,7 +136,7 @@ class _LessorState extends State<Lessor> {
                               swidth: sWidth,
                               formkey: _formKey,
                               controller: searchInputController,
-                              comparableData: [],
+                              comparableData: const [],
                               col1: "ID",
                               col2: "First Name",
                               col3: "Last Name",
@@ -190,7 +188,7 @@ class _LessorState extends State<Lessor> {
               padding: const EdgeInsets.all(10),
               child: Text(
                 " ${detail.data()[index].value}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     color: AppColors.golden,
                     fontWeight: FontWeight.bold),

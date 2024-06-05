@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -43,7 +42,6 @@ alter table residence add constraint FK_lu53jtw5wts0i9ymxi5afohuy foreign key (l
     try {
       await db.execute(schema);
       print("database created ...");
-      ;
     } catch (e) {
       print(e);
     }

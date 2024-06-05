@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class CustomModelWidget extends StatefulWidget {
   const CustomModelWidget({super.key});
@@ -25,7 +24,7 @@ class _CustomModelWidgetState extends State<CustomModelWidget> {
           color: Colors.grey.shade300,
           child: Center(
               child: InkWell(
-                  onTap: () {}, child: Text("hello bro , custom modal"))),
+                  onTap: () {}, child: const Text("hello bro , custom modal"))),
         ),
       ),
     );

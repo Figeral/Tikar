@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import '../../../../../vm/renter_vm.dart';
@@ -121,7 +120,7 @@ class _RenterState extends State<Renter> {
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
-                            comparableData: [],
+                            comparableData: const [],
                             col1: "ID",
                             col2: "First Name",
                             col3: "Last Name",
@@ -172,7 +171,7 @@ class _RenterState extends State<Renter> {
               padding: const EdgeInsets.all(10),
               child: Text(
                 " ${detail.data()[index].value}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     color: AppColors.golden,
                     fontWeight: FontWeight.bold),

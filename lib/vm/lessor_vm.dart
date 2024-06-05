@@ -25,9 +25,9 @@ class LessorViewModel {
     // await localStorage.saveAll(await getLessor());
     // List result = await localStorage.readAllItems();
     List<LessorModel> data = [];
-    result.forEach((element) {
+    for (var element in result) {
       data.add(LessorModel.fromJson(element));
-    });
+    }
     List<List<Object>> comparableData = [];
     comparableData = data
         .map((model) => [

@@ -148,7 +148,6 @@ class _SignInState extends State<SignIn> {
                     } else if (value != pwController.text) {
                       return "différent du mots de passe";
                     }
-                    ;
                     return null;
                   },
                 ),

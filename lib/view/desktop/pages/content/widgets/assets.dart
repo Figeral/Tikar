@@ -95,7 +95,6 @@ class _AssetsState extends State<Assets> {
                   child: StreamBuilder(
                       stream: vm.stream,
                       builder: (context, snapshot) {
-                        ;
                         vm.setStream;
                         if (snapshot.hasData) {
                           print((snapshot.data as List<dynamic>).length);
@@ -125,7 +124,7 @@ class _AssetsState extends State<Assets> {
                             formkey: _formKey,
                             controller: searchInputController,
                             // isVisible: _isVisible,
-                            comparableData: [],
+                            comparableData: const [],
                             col1: "Type",
                             col2: "Lessor",
                             col3: "Surface Area /M²",
@@ -175,7 +174,7 @@ class _AssetsState extends State<Assets> {
               padding: const EdgeInsets.all(10),
               child: Text(
                 " ${detail.data()[index].value}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     color: AppColors.golden,
                     fontWeight: FontWeight.bold),

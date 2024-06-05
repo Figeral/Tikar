@@ -27,9 +27,9 @@ class AssetViewModel {
     // List result = await localStorage.readAllItems();
     print("result from asset local storage : $result");
     List<AssetModel> data = [];
-    result.forEach((element) {
+    for (var element in result) {
       data.add(AssetModel.fromJson(element));
-    });
+    }
     len = result.length;
     List<List<Object?>> comparableData = [];
     comparableData = data

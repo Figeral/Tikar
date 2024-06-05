@@ -22,9 +22,9 @@ class RentViewModel {
   void setStream() async {
     List result = await getRent();
     List<RentModel> data = [];
-    result.forEach((element) {
+    for (var element in result) {
       data.add(RentModel.fromJson(element));
-    });
+    }
     len = result.length;
     List<List<Object?>> comparableData = [];
     comparableData = data

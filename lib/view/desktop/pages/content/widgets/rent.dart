@@ -127,7 +127,7 @@ class _LocationState extends State<Location> {
                             swidth: sWidth,
                             formkey: _formKey,
                             controller: searchInputController,
-                            comparableData: [],
+                            comparableData: const [],
                             col1: "Type",
                             col2: "Renter",
                             col3: "Cost",

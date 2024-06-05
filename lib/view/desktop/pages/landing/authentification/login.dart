@@ -56,7 +56,7 @@ class _LoginState extends State<Login> {
               child: TextFormField(
                 obscureText: isPressed,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.lock_open),
+                  prefixIcon: const Icon(Icons.lock_open),
                   suffix: GestureDetector(
                       onTap: () {
                         setState(() {

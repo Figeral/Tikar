@@ -21,9 +21,9 @@ class StaffViewModel {
   void setStream() async {
     List result = await getRenters();
     List<StaffModel> data = [];
-    result.forEach((element) {
+    for (var element in result) {
       data.add(StaffModel.fromJson(element));
-    });
+    }
     List<List<Object>> comparableData = [];
     comparableData = data
         .map((model) => [

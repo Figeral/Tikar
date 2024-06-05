@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tikar/view/desktop/desktop.dart';
+import 'package:tikar/view/desktop/pages/content/app_content.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,8 +17,10 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => const Desktop()));
+      // Navigator.of(context)
+      //     .pushReplacement(MaterialPageRoute(builder: (_) => const Desktop()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const AppContent()));
     });
   }
 

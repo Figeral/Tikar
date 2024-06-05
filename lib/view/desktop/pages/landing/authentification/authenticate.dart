@@ -33,7 +33,7 @@ class _AuthenticateState extends State<Authenticate>
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(125, 219, 208, 219),
+                color: const Color.fromARGB(125, 219, 208, 219),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -52,7 +52,7 @@ class _AuthenticateState extends State<Authenticate>
               ),
             ),
 
-            Container(
+            SizedBox(
               width: sWidth * 0.6,
               height: sHeight,
               child: Padding(
