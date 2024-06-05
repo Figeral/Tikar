@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:tikar/vm/asset_vm.dart';
 import 'package:tikar/constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/data_tables/asset_dataTable.dart';
+
 
 class Assets extends StatefulWidget {
   const Assets({super.key});
@@ -98,7 +99,7 @@ class _AssetsState extends State<Assets> {
                         vm.setStream;
                         if (snapshot.hasData) {
                           print((snapshot.data as List<dynamic>).length);
-                          return PaginatedDataParent(
+                          return AssetPaginatedData(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
@@ -118,7 +119,7 @@ class _AssetsState extends State<Assets> {
                             },
                           );
                         } else {
-                          return PaginatedDataParent(
+                          return AssetPaginatedData(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,

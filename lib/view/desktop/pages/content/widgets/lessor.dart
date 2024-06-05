@@ -4,7 +4,8 @@ import 'package:tikar/vm/lessor_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/data_tables/lessor_dataTable.dart';
+
 
 class Lessor extends StatefulWidget {
   const Lessor({super.key});
@@ -113,7 +114,7 @@ class _LessorState extends State<Lessor> {
                         builder: (context, snapshot) {
                           vm.setStream;
                           if (snapshot.hasData) {
-                            return PaginatedData(
+                            return LessorPaginatedData(
                               refresh: vm.setStream,
                               swidth: sWidth,
                               formkey: _formKey,
@@ -131,7 +132,7 @@ class _LessorState extends State<Lessor> {
                               },
                             );
                           } else {
-                            return PaginatedData(
+                            return LessorPaginatedData(
                               refresh: vm.setStream,
                               swidth: sWidth,
                               formkey: _formKey,

@@ -4,7 +4,7 @@ import 'package:tikar/vm/rent_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/utils/Paginated_data.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/data_tables/rent_dataTable.dart';
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -103,7 +103,7 @@ class _LocationState extends State<Location> {
                       builder: (context, snapshot) {
                         vm.setStream;
                         if (snapshot.hasData) {
-                          return PaginatedDataParent(
+                          return RentPaginatedData(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
@@ -122,7 +122,7 @@ class _LocationState extends State<Location> {
                             },
                           );
                         } else {
-                          return PaginatedDataParent(
+                          return RentPaginatedData(
                             refresh: vm.setStream,
                             swidth: sWidth,
                             formkey: _formKey,
