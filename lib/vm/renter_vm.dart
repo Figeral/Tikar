@@ -30,6 +30,7 @@ class RenterViewModel {
               model.id,
               model.fname,
               model.lname,
+              model.gender,
               model.tel,
               model.isActive,
               model.image ?? Uint8List(0),

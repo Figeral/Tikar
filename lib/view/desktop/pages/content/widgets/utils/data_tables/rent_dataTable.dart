@@ -3,27 +3,27 @@ import 'package:tikar/view/desktop/pages/content/widgets/utils/data_sources/rent
 
 class RentPaginatedData extends StatefulWidget {
   void Function() refresh;
-  void Function(bool isVisible) visibility;
+
   String col1, col2, col3, col4, col5, col6;
   double swidth;
   GlobalKey<FormState> formkey;
   TextEditingController controller;
 
   List<List<Object?>> comparableData;
-  RentPaginatedData(
-      {super.key,
-      required this.refresh,
-      required this.swidth,
-      required this.formkey,
-      required this.controller,
-      required this.comparableData,
-      required this.col1,
-      required this.col2,
-      required this.col3,
-      required this.col4,
-      required this.col5,
-      required this.col6,
-      required this.visibility});
+  RentPaginatedData({
+    super.key,
+    required this.refresh,
+    required this.swidth,
+    required this.formkey,
+    required this.controller,
+    required this.comparableData,
+    required this.col1,
+    required this.col2,
+    required this.col3,
+    required this.col4,
+    required this.col5,
+    required this.col6,
+  });
 
   @override
   State<RentPaginatedData> createState() => _RentPaginatedDataState();
@@ -60,12 +60,7 @@ class _RentPaginatedDataState extends State<RentPaginatedData> {
         actions: [
           IconButton(
               tooltip: "press here to open and close",
-              onPressed: () {
-                setState(() {
-                  widget.visibility(_isVisible);
-                  _isVisible = !_isVisible;
-                });
-              },
+              onPressed: () {},
               icon: const Icon(Icons.add)),
           IconButton(
               tooltip: "press here to refresh",

@@ -31,6 +31,7 @@ class StaffViewModel {
               model.fname,
               model.lname,
               model.role,
+              model.post,
               model.isActive,
               model.image ?? Uint8List(0),
             ])

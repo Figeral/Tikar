@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/vm/sidebar_vm.dart';
+import 'package:tikar/constants/app_colors.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/rent.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/staff.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/assets.dart';
@@ -70,13 +71,25 @@ class _AppContentState extends State<AppContent> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Scaffold(
+                    drawer: Drawer(
+                      child: Container(
+                        child: Text("hello mf"),
+                      ),
+                    ),
                     appBar: AppBar(
-                      automaticallyImplyLeading: false,
+                      actions: const [
+                        Text("action1"),
+                        Text("action2"),
+                        Text("action3")
+                      ],
+                      automaticallyImplyLeading: true,
                       backgroundColor: Colors.grey.shade400,
                     ),
-                    body: Stack(children: [
-                      SafeArea(child: appContent[snapshot.data!.abs()])
-                    ]),
+                    body: Stack(
+                      children: [
+                        SafeArea(child: appContent[snapshot.data!.abs()])
+                      ],
+                    ),
                   );
                 } else {
                   return const Text("Stream failed");

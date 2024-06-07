@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:tikar/vm/staff_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/utils/custom_modals.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/modals/custom_modals.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/data_tables/staff_dataTable.dart';
-
 
 class Employee extends StatefulWidget {
   const Employee({super.key});
@@ -42,111 +41,94 @@ class _EmployeeState extends State<Employee> {
     final sHeight = MediaQuery.of(context).size.height;
     final sWidth = MediaQuery.of(context).size.width;
 
-    return SingleChildScrollView(
-      child: Stack(
-        clipBehavior: Clip.antiAlias,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
-            child: Column(
-              children: <Widget>[
-                const Text(
-                  'Management  Employées',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.nightBue,
-                    fontSize: 25,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
+          child: Column(
+            children: <Widget>[
+              const Text(
+                'Management  Employées',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.nightBue,
+                  fontSize: 25,
+                ),
+              ),
+              const SizedBox(
+                height: 45,
+              ),
+              Center(
+                child: Container(
+                  //color: Colors.grey.shade200,
+                  constraints: const BoxConstraints(
+                      maxHeight: 450, maxWidth: 1900, minWidth: 880),
+                  width: sWidth * 0.7,
+                  height: sHeight * 0.35,
+                  child: GridView.builder(
+                    physics: const ScrollPhysics(),
+                    itemCount: 4,
+                    padding: const EdgeInsets.all(20),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12),
+                    itemBuilder: (context, index) => buildGrid(detail, index),
                   ),
                 ),
-                const SizedBox(
-                  height: 45,
-                ),
-                Center(
-                  child: Container(
-                    //color: Colors.grey.shade200,
-                    constraints: const BoxConstraints(
-                        maxHeight: 450, maxWidth: 1900, minWidth: 880),
-                    width: sWidth * 0.7,
-                    height: sHeight * 0.35,
-                    child: GridView.builder(
-                      itemCount: 4,
-                      padding: const EdgeInsets.all(20),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 12),
-                      itemBuilder: (context, index) => buildGrid(detail, index),
+              ),
+              SizedBox(
+                height: sHeight * 0.07,
+              ),
+              Container(
+                width: sWidth * 0.70,
+                height: sHeight * 0.82,
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    border: Border.all(
+                      color: Colors.grey.shade600,
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: sHeight * 0.07,
-                ),
-                Container(
-                  width: sWidth * 0.70,
-                  height: sHeight * 0.82,
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      border: Border.all(
-                        color: Colors.grey.shade600,
-                      ),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
-                  padding: EdgeInsets.all(sHeight * 0.05),
-                  child: StreamBuilder(
-                      stream: vm.stream,
-                      builder: (context, snapshot) {
-                        vm.setStream;
-                        if (snapshot.hasData) {
-                          return StaffPaginatedData(
-                            refresh: vm.setStream,
-                            swidth: sWidth,
-                            formkey: _formKey,
-                            controller: searchInputController,
-                            comparableData: snapshot.data,
-                            col1: "ID",
-                            col2: "First Name",
-                            col3: "Last Name",
-                            col4: "Role",
-                            col5: "Active",
-                            visibility: (bool isVisible) {
-                              setState(() {
-                                _isVisible = isVisible;
-                                // emp = snapshot.data;
-                                // Et = emp.length;
-                              });
-                            },
-                          );
-                        } else {
-                          return StaffPaginatedData(
-                            refresh: vm.setStream,
-                            swidth: sWidth,
-                            formkey: _formKey,
-                            controller: searchInputController,
-                            comparableData: const [],
-                            col1: "ID",
-                            col2: "First Name",
-                            col3: "Last Name",
-                            col4: "Telephone",
-                            col5: "Active",
-                            visibility: (bool isVisible) {
-                              setState(() {
-                                _isVisible = isVisible;
-                              });
-                            },
-                          );
-                        }
-                      }),
-                ),
-              ],
-            ),
+                    borderRadius: const BorderRadius.all(Radius.circular(20))),
+                padding: EdgeInsets.all(sHeight * 0.05),
+                child: StreamBuilder(
+                    stream: vm.stream,
+                    builder: (context, snapshot) {
+                      vm.setStream;
+                      if (snapshot.hasData) {
+                        return StaffPaginatedData(
+                          refresh: vm.setStream,
+                          swidth: sWidth,
+                          formkey: _formKey,
+                          controller: searchInputController,
+                          comparableData: snapshot.data,
+                          col1: "ID",
+                          col2: "First Name",
+                          col3: "Last Name",
+                          col4: "Role",
+                          col5: "Post",
+                          col6: "Active",
+                        );
+                      } else {
+                        return StaffPaginatedData(
+                          refresh: vm.setStream,
+                          swidth: sWidth,
+                          formkey: _formKey,
+                          controller: searchInputController,
+                          comparableData: const [],
+                          col1: "ID",
+                          col2: "First Name",
+                          col3: "Last Name",
+                          col4: "Role",
+                          col5: "Poste",
+                          col6: "Active",
+                        );
+                      }
+                    }),
+              ),
+            ],
           ),
-          Visibility(
-            visible: _isVisible,
-            child: const CustomModelWidget(),
-          ),
-        ],
+        ),
       ),
     );
   }

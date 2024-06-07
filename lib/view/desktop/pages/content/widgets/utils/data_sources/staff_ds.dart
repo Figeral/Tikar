@@ -11,6 +11,7 @@ class StaffDataSource extends DataTableSource {
       DataCell(Text("${source[index][2]}")),
       DataCell(Text("${source[index][3]}")),
       DataCell(Text("${source[index][4]}")),
+      DataCell(Text("${source[index][5]}")),
     ]);
   }
 
