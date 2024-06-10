@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/data_sources/rent_ds.dart';
 
-class RentPaginatedData extends StatefulWidget {
+class RentPaginatedData extends StatelessWidget {
   void Function() refresh;
 
   String col1, col2, col3, col4, col5, col6;
@@ -25,20 +25,16 @@ class RentPaginatedData extends StatefulWidget {
     required this.col6,
   });
 
-  @override
-  State<RentPaginatedData> createState() => _RentPaginatedDataState();
-}
-
-class _RentPaginatedDataState extends State<RentPaginatedData> {
   bool _isVisible = true;
+
   @override
   Widget build(BuildContext context) {
     // widget.refresh();
     return PaginatedDataTable(
         header: Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, widget.swidth * 0.47, 0),
+          padding: EdgeInsets.fromLTRB(0, 0, swidth * 0.47, 0),
           child: Form(
-            key: widget.formkey,
+            key: formkey,
             child: TextFormField(
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
@@ -47,7 +43,7 @@ class _RentPaginatedDataState extends State<RentPaginatedData> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
-              controller: widget.controller,
+              controller: controller,
               validator: (value) {
                 if (value!.contains("@") || value.contains("\$")) {
                   return "caractère speciaux interdit";
@@ -65,7 +61,7 @@ class _RentPaginatedDataState extends State<RentPaginatedData> {
           IconButton(
               tooltip: "press here to refresh",
               onPressed: () {
-                widget.refresh();
+                refresh();
               },
               icon: const Icon(Icons.replay_outlined)),
         ],
@@ -74,49 +70,49 @@ class _RentPaginatedDataState extends State<RentPaginatedData> {
         columns: <DataColumn>[
           DataColumn(
             label: Text(
-              widget.col1,
+              col1,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             // onSort: _sort,
           ),
           DataColumn(
             label: Text(
-              widget.col2,
+              col2,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             // onSort: _sort,
           ),
           DataColumn(
             label: Text(
-              widget.col3,
+              col3,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             //onSort: _sort,
           ),
           DataColumn(
             label: Text(
-              widget.col4,
+              col4,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             //onSort: _sort,
           ),
           DataColumn(
             label: Text(
-              widget.col5,
+              col5,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             //onSort: _sort,
           ),
           DataColumn(
             label: Text(
-              widget.col6,
+              col6,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             //onSort: _sort,
           ),
         ],
         source: RentDataSource(
-          source: widget.comparableData,
+          source: comparableData,
         ));
   }
 }

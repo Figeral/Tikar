@@ -27,7 +27,7 @@ class _LocationState extends State<Location>
   @override
   void initState() {
     _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
+        vsync: this, duration: const Duration(milliseconds: 300));
 
     super.initState();
     vm.setStream();
@@ -75,8 +75,8 @@ class _LocationState extends State<Location>
                       child: Transform.rotate(
                         angle: (math.pi * 2) / dividor,
                         child: Transform.translate(
-                          offset: Offset(dx * _controller.value * 2,
-                              dy * _controller.value),
+                          offset: Offset(
+                              dx * _controller.value, dy * _controller.value),
                           child: Container(
                             width: 680 * _controller.value,
                             height: 780 * _controller.value,

@@ -2,6 +2,8 @@ import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'utils/modals/lessor_modal.dart';
 import 'package:tikar/vm/lessor_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
@@ -26,7 +28,7 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
+        vsync: this, duration: const Duration(milliseconds: 300));
 
     //_controller.forward();
 
@@ -41,8 +43,13 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  void toggle() =>
-      _controller.isDismissed ? _controller.forward() : _controller.reverse();
+  void toggle() {
+    _controller.isDismissed ? _controller.forward() : _controller.reverse();
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
+
   late AnimationController _controller;
   @override
   Widget build(BuildContext context) {
@@ -71,17 +78,12 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
               dividor != 0
                   ? Opacity(
                       opacity: mO,
-                      child: Transform.rotate(
-                        angle: (math.pi * 2) / dividor,
-                        child: Transform.translate(
-                          offset: Offset(dx * _controller.value * 2,
-                              dy * _controller.value),
-                          child: Container(
-                            width: 680 * _controller.value,
-                            height: 780 * _controller.value,
-                            color: Colors.grey,
-                            //child: LessorM,
-                          ),
+                      child: Transform.translate(
+                        offset: Offset(
+                            dx * -_controller.value, dy * -_controller.value),
+                        child: LessorModal(
+                          width: 680 * _controller.value,
+                          height: 780 * _controller.value,
                         ),
                       ),
                     )
@@ -120,89 +122,103 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
         },
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
-          child: Column(
-            children: <Widget>[
-              const Text(
-                'Management  Bailleur',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
-              ),
-              const SizedBox(
-                height: 45,
-              ),
-              Center(
-                child: Container(
-                  //color: Colors.grey.shade200,
-                  constraints: const BoxConstraints(
-                      maxHeight: 450, maxWidth: 1900, minWidth: 880),
-                  width: sWidth * 0.7,
-                  height: sHeight * 0.35,
-                  child: GridView.builder(
-                    itemCount: 4,
-                    padding: const EdgeInsets.all(20),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12),
-                    itemBuilder: (context, index) => buildGrid(detail, index),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: sHeight * 0.07,
-              ),
-              Container(
-                width: sWidth * 0.70,
-                height: sHeight * 0.82,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    border: Border.all(
-                      color: Colors.grey.shade600,
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
+              child: Column(
+                children: <Widget>[
+                  const Text(
+                    'Management  Bailleur',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
                     ),
-                    borderRadius: const BorderRadius.all(Radius.circular(20))),
-                padding: EdgeInsets.all(sHeight * 0.05),
-                child: StreamBuilder(
-                    stream: vm.stream,
-                    builder: (context, snapshot) {
-                      vm.setStream;
-                      if (snapshot.hasData) {
-                        return LessorPaginatedData(
-                          refresh: vm.setStream,
-                          swidth: sWidth,
-                          formkey: _formKey,
-                          controller: searchInputController,
-                          comparableData: snapshot.data,
-                          col1: "ID",
-                          col2: "First Name",
-                          col3: "Last Name",
-                          col4: "Gender",
-                          col5: "Telephone",
-                          col6: "Active",
-                        );
-                      } else {
-                        return LessorPaginatedData(
-                          refresh: vm.setStream,
-                          swidth: sWidth,
-                          formkey: _formKey,
-                          controller: searchInputController,
-                          comparableData: const [],
-                          col1: "ID",
-                          col2: "First Name",
-                          col3: "Last Name",
-                          col4: "Gender",
-                          col5: "Telephone",
-                          col6: "Active",
-                        );
-                      }
-                    }),
+                  ),
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  Center(
+                    child: Container(
+                      //color: Colors.grey.shade200,
+                      constraints: const BoxConstraints(
+                          maxHeight: 450, maxWidth: 1900, minWidth: 880),
+                      width: sWidth * 0.7,
+                      height: sHeight * 0.35,
+                      child: GridView.builder(
+                        itemCount: 4,
+                        padding: const EdgeInsets.all(20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12),
+                        itemBuilder: (context, index) =>
+                            buildGrid(detail, index),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: sHeight * 0.07,
+                  ),
+                  Container(
+                    width: sWidth * 0.70,
+                    height: sHeight * 0.82,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        border: Border.all(
+                          color: Colors.grey.shade600,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
+                    padding: EdgeInsets.all(sHeight * 0.05),
+                    child: StreamBuilder(
+                        stream: vm.stream,
+                        builder: (context, snapshot) {
+                          vm.setStream;
+                          if (snapshot.hasData) {
+                            return LessorPaginatedData(
+                              refresh: vm.setStream,
+                              swidth: sWidth,
+                              formkey: _formKey,
+                              controller: searchInputController,
+                              comparableData: snapshot.data,
+                              col1: "ID",
+                              col2: "First Name",
+                              col3: "Last Name",
+                              col4: "Gender",
+                              col5: "Telephone",
+                              col6: "Active",
+                            );
+                          } else {
+                            return LessorPaginatedData(
+                              refresh: vm.setStream,
+                              swidth: sWidth,
+                              formkey: _formKey,
+                              controller: searchInputController,
+                              comparableData: const [],
+                              col1: "ID",
+                              col2: "First Name",
+                              col3: "Last Name",
+                              col4: "Gender",
+                              col5: "Telephone",
+                              col6: "Active",
+                            );
+                          }
+                        }),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Visibility(
+              visible: _isVisible,
+              child: Container(
+                width: sWidth,
+                height: sHeight + sHeight / 2,
+                color: Color.fromARGB(112, 12, 12, 12),
+              ),
+            )
+          ],
         ),
       ),
     );

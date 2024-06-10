@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/data_sources/lessor_ds.dart';
 
-class LessorPaginatedData extends StatefulWidget {
+class LessorPaginatedData extends StatelessWidget {
   void Function() refresh;
 
   String col1, col2, col3, col4, col5, col6;
@@ -26,17 +26,7 @@ class LessorPaginatedData extends StatefulWidget {
     required this.col6,
   });
 
-  @override
-  State<LessorPaginatedData> createState() => _LessorPaginatedDataState();
-}
-
-class _LessorPaginatedDataState extends State<LessorPaginatedData> {
   bool _isVisible = true;
-  @override
-  void initState() {
-    super.initState();
-    //widget.refresh();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +37,9 @@ class _LessorPaginatedDataState extends State<LessorPaginatedData> {
   PaginatedDataTable tableMaker() {
     return PaginatedDataTable(
       header: Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, widget.swidth * 0.47, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, swidth * 0.47, 0),
         child: Form(
-          key: widget.formkey,
+          key: formkey,
           child: TextFormField(
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search),
@@ -58,7 +48,7 @@ class _LessorPaginatedDataState extends State<LessorPaginatedData> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
             ),
-            controller: widget.controller,
+            controller: controller,
             validator: (value) {
               if (value!.contains("@") || value.contains("\$")) {
                 return "caractère speciaux interdit";
@@ -76,7 +66,7 @@ class _LessorPaginatedDataState extends State<LessorPaginatedData> {
         IconButton(
             tooltip: "press here to refresh",
             onPressed: () {
-              widget.refresh();
+              refresh();
             },
             icon: const Icon(Icons.replay_outlined)),
       ],
@@ -85,49 +75,49 @@ class _LessorPaginatedDataState extends State<LessorPaginatedData> {
       columns: <DataColumn>[
         DataColumn(
           label: Text(
-            widget.col1,
+            col1,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           // onSort: _sort,
         ),
         DataColumn(
           label: Text(
-            widget.col2,
+            col2,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           // onSort: _sort,
         ),
         DataColumn(
           label: Text(
-            widget.col3,
+            col3,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           //onSort: _sort,
         ),
         DataColumn(
           label: Text(
-            widget.col4,
+            col4,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           //onSort: _sort,
         ),
         DataColumn(
           label: Text(
-            widget.col5,
+            col5,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           //onSort: _sort,
         ),
         DataColumn(
           label: Text(
-            widget.col6,
+            col6,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           //onSort: _sort,
         ),
       ],
       source: LessorDataSource(
-        source: widget.comparableData,
+        source: comparableData,
       ),
     );
   }
