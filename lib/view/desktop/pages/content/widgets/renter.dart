@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../vm/renter_vm.dart';
 import 'package:tikar/constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
+import 'package:tikar/view/desktop/pages/content/widgets/utils/modals/renter_modal.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/data_tables/renter_dataTable.dart';
 
 class Renter extends StatefulWidget {
@@ -39,8 +40,13 @@ class _RenterState extends State<Renter> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  void toggle() =>
-      _controller.isDismissed ? _controller.forward() : _controller.reverse();
+  void toggle() {
+    _controller.isDismissed ? _controller.forward() : _controller.reverse();
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
+
   late AnimationController _controller;
   @override
   Widget build(BuildContext context) {
@@ -58,7 +64,7 @@ class _RenterState extends State<Renter> with SingleTickerProviderStateMixin {
         animation: _controller,
         builder: (context, child) {
           dividor = _controller.value * 2;
-          print(dividor);
+
           final size = miniSize + (_controller.value * 30);
           final opacity = miniOpacity + (_controller.value * miniOpacity);
           final mO = _controller.value * 1;
@@ -70,16 +76,12 @@ class _RenterState extends State<Renter> with SingleTickerProviderStateMixin {
               dividor != 0
                   ? Opacity(
                       opacity: mO,
-                      child: Transform.rotate(
-                        angle: (math.pi * 2) / dividor,
-                        child: Transform.translate(
-                          offset: Offset(
-                              dx * _controller.value, dy * _controller.value),
-                          child: Container(
-                            width: 680 * _controller.value,
-                            height: 780 * _controller.value,
-                            color: Colors.grey,
-                          ),
+                      child: Transform.translate(
+                        offset: Offset(
+                            dx * -_controller.value, dy * -_controller.value),
+                        child: RenterModal(
+                          width: 680 * _controller.value,
+                          height: 780 * _controller.value,
                         ),
                       ),
                     )
@@ -118,90 +120,107 @@ class _RenterState extends State<Renter> with SingleTickerProviderStateMixin {
         },
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
-          child: Column(
-            children: <Widget>[
-              const Text(
-                'Management  Locataires',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: AppColors.golden,
-                ),
-              ),
-              const SizedBox(
-                height: 45,
-              ),
-              Center(
-                child: Container(
-                  //color: Colors.grey.shade200,
-                  constraints: const BoxConstraints(
-                      maxHeight: 450, maxWidth: 1900, minWidth: 880),
-                  width: sWidth * 0.7,
-                  height: sHeight * 0.35,
-                  child: GridView.builder(
-                    itemCount: 4,
-                    padding: const EdgeInsets.all(20),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12),
-                    itemBuilder: (context, index) => buildGrid(detail, index),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: sHeight * 0.07,
-              ),
-              Container(
-                width: sWidth * 0.70,
-                height: sHeight * 0.82,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    border: Border.all(
-                      color: Colors.grey.shade600,
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 45),
+              child: Column(
+                children: <Widget>[
+                  const Text(
+                    'Management  Locataires',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: AppColors.golden,
                     ),
-                    borderRadius: const BorderRadius.all(Radius.circular(20))),
-                padding: EdgeInsets.all(sHeight * 0.04),
-                child: StreamBuilder(
-                    stream: vm.stream,
-                    builder: (context, snapshot) {
-                      vm.setStream;
-                      if (snapshot.hasData) {
-                        return RenterPaginatedData(
-                          refresh: vm.setStream,
-                          swidth: sWidth,
-                          formkey: _formKey,
-                          controller: searchInputController,
-                          comparableData: snapshot.data,
-                          col1: "ID",
-                          col2: "First Name",
-                          col3: "Last Name",
-                          col4: "Gender",
-                          col5: "Telephone",
-                          col6: "Active",
-                        );
-                      } else {
-                        return RenterPaginatedData(
-                          refresh: vm.setStream,
-                          swidth: sWidth,
-                          formkey: _formKey,
-                          controller: searchInputController,
-                          comparableData: const [],
-                          col1: "ID",
-                          col2: "First Name",
-                          col3: "Last Name",
-                          col4: "Gender",
-                          col5: "Telephone",
-                          col6: "Active",
-                        );
-                      }
-                    }),
+                  ),
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  Center(
+                    child: Container(
+                      //color: Colors.grey.shade200,
+                      constraints: const BoxConstraints(
+                          maxHeight: 450, maxWidth: 1900, minWidth: 880),
+                      width: sWidth * 0.7,
+                      height: sHeight * 0.35,
+                      child: GridView.builder(
+                        itemCount: 4,
+                        padding: const EdgeInsets.all(20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12),
+                        itemBuilder: (context, index) =>
+                            buildGrid(detail, index),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: sHeight * 0.07,
+                  ),
+                  Container(
+                    width: sWidth * 0.70,
+                    height: sHeight * 0.82,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        border: Border.all(
+                          color: Colors.grey.shade600,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
+                    padding: EdgeInsets.all(sHeight * 0.04),
+                    child: StreamBuilder(
+                        stream: vm.stream,
+                        builder: (context, snapshot) {
+                          vm.setStream;
+                          if (snapshot.hasData) {
+                            return RenterPaginatedData(
+                              refresh: vm.setStream,
+                              swidth: sWidth,
+                              formkey: _formKey,
+                              controller: searchInputController,
+                              comparableData: snapshot.data,
+                              col1: "ID",
+                              col2: "First Name",
+                              col3: "Last Name",
+                              col4: "Gender",
+                              col5: "Telephone",
+                              col6: "Active",
+                            );
+                          } else {
+                            return RenterPaginatedData(
+                              refresh: vm.setStream,
+                              swidth: sWidth,
+                              formkey: _formKey,
+                              controller: searchInputController,
+                              comparableData: const [],
+                              col1: "ID",
+                              col2: "First Name",
+                              col3: "Last Name",
+                              col4: "Gender",
+                              col5: "Telephone",
+                              col6: "Active",
+                            );
+                          }
+                        }),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Visibility(
+              visible: _isVisible,
+              child: GestureDetector(
+                onTap: toggle,
+                child: Container(
+                  width: sWidth,
+                  height: sHeight + sHeight / 2,
+                  color: Color.fromARGB(112, 12, 12, 12),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

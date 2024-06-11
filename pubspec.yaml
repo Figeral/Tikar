@@ -38,25 +38,32 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   shimmer_animation: ^2.1.0+1
 
-  window_manager: ^0.3.8
+  # window_manager: ^0.3.8
   image_picker: ^1.0.8
-  provider: ^6.1.2
+  # provider: ^6.1.2
   flutter_svg: ^2.0.10+1
   sqflite: ^2.3.3+1
 
-  crud_table: ^0.0.6
+  # crud_table: ^0.0.6
 
   json_annotation: ^4.9.0
-  build_runner: ^2.4.9
+  # build_runner: ^2.4.9
   path_provider: ^2.1.3
   path: ^1.9.0
   sqflite_common_ffi: ^2.3.3
-  vector_math: ^2.1.4
+  # vector_math: ^2.1.4
+  country_code_picker: ^3.0.0
+  flutter_localization: ^0.2.0
+  flutter_localizations:
+    sdk: flutter
+  # freezed: ^2.5.2
  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: any
+  build_runner: any
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -65,7 +72,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   msix: ^3.16.7
-  json_serializable: ^6.8.0
+ 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

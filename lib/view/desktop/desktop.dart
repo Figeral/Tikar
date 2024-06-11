@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:window_manager/window_manager.dart';
 import 'package:tikar/view/desktop/pages/landing/landing.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tikar/view/desktop/pages/landing/authentification/authenticate.dart';
+// import 'package:window_manager/window_manager.dart';
 
 class Desktop extends StatefulWidget {
   const Desktop({super.key});
@@ -12,7 +12,7 @@ class Desktop extends StatefulWidget {
 }
 
 class _DesktopState extends State<Desktop> {
-  final wm = WindowManager;
+ // final wm = WindowManager;
   final _pageController = PageController();
   bool leftTap = false;
   bool rightTap = true;

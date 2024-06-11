@@ -66,7 +66,7 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
         animation: _controller,
         builder: (context, child) {
           dividor = _controller.value * 2;
-          print(dividor);
+
           final size = miniSize + (_controller.value * 30);
           final opacity = miniOpacity + (_controller.value * miniOpacity);
           final mO = _controller.value * 1;
@@ -212,10 +212,13 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
             ),
             Visibility(
               visible: _isVisible,
-              child: Container(
-                width: sWidth,
-                height: sHeight + sHeight / 2,
-                color: Color.fromARGB(112, 12, 12, 12),
+              child: GestureDetector(
+                onTap: toggle,
+                child: Container(
+                  width: sWidth,
+                  height: sHeight + sHeight / 2,
+                  color: Color.fromARGB(112, 12, 12, 12),
+                ),
               ),
             )
           ],
