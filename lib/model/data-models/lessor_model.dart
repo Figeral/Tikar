@@ -1,11 +1,16 @@
 import 'dart:typed_data';
+import 'package:tikar/constants/utile.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+// part lessor_model.g.dart;
+// @JsonSerializable(createToJson: true, explicitToJson: true)
 class LessorModel {
   int id;
   String fname, lname, gender;
   int tel;
   bool isActive;
+
+  @Uint8ListConverter()
   Uint8List? image;
   LessorModel(
       {required this.id,
@@ -27,4 +32,5 @@ class LessorModel {
       isActive: json['active'],
     );
   }
+  // Map<String, dynamic> toJson() => _$toJson(this);
 }

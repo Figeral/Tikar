@@ -261,6 +261,7 @@ class _LessorModalState extends State<LessorModal> {
                                 if (_formKey.currentState!.validate()) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
+                                      behavior: SnackBarBehavior.floating,
                                       content: Text("processing data"),
                                       action: SnackBarAction(
                                         label: "undo",
