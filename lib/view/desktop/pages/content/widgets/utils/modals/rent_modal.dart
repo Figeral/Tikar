@@ -5,11 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tikar/constants/app_colors.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
-
 class RentModal extends StatefulWidget {
-   final double width, height;
+  final double width, height;
   const RentModal({super.key, required this.width, required this.height});
-
 
   @override
   State<RentModal> createState() => _RentModalState();
@@ -55,7 +53,7 @@ class _RentModalState extends State<RentModal> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(width * 0.37, 0, 0, 0),
                         child: const Text(
-                          "Ajouter un Bailleur",
+                          "Ajouter une Location",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,

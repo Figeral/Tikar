@@ -8,19 +8,22 @@ class LessorModel {
   int id;
   String fname, lname, gender;
   int tel;
-  bool isActive;
+  bool isActive = true;
+  bool inCameroon;
 
-  @Uint8ListConverter()
-  Uint8List? image;
-  LessorModel(
-      {required this.id,
-      required this.fname,
-      required this.lname,
-      required this.gender,
-      required this.tel,
-      required this.isActive,
-      required this.image});
-  get element => [id, fname, lname, tel, isActive, image];
+  // @Uint8ListConverter()
+  // Uint8List? image;
+  LessorModel({
+    required this.id,
+    required this.fname,
+    required this.lname,
+    required this.gender,
+    required this.tel,
+    required this.isActive,
+    required this.inCameroon,
+    // required this.image,
+  });
+  // get element => [id, fname, lname, tel, isActive, image];
   factory LessorModel.fromJson(Map<String, dynamic> json) {
     return LessorModel(
       id: json['id'],
@@ -28,9 +31,17 @@ class LessorModel {
       lname: json['lname'],
       gender: json['gender'],
       tel: json['tel'],
-      image: json['picture'],
+      //image: json['picture'],
       isActive: json['active'],
+      inCameroon: json['inCameroon'],
     );
   }
-  // Map<String, dynamic> toJson() => _$toJson(this);
+  Map<dynamic, dynamic> toJson() => {
+        "fname": fname,
+        "lname": lname,
+        //"tel": tel,
+        //"picture": image ?? [],
+        "gender": gender,
+        //"active": isActive
+      };
 }

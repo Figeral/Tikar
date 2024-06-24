@@ -2,9 +2,11 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:tikar/vm/lessor_vm.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tikar/constants/app_colors.dart';
 import '../../../../../../../constants/utile.dart';
+import 'package:tikar/model/data-models/lessor_model.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
 class LessorModal extends StatefulWidget {
@@ -16,6 +18,12 @@ class LessorModal extends StatefulWidget {
 }
 
 class _LessorModalState extends State<LessorModal> {
+  final vm = LessorViewModel();
+  final _controllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
   Gender _selectedGender = Gender.male;
   XFile? _image;
   final picker = ImagePicker();
@@ -26,6 +34,14 @@ class _LessorModalState extends State<LessorModal> {
         _image = pickedImage;
       });
     }
+  }
+
+  // get ImageByte async => await _image!.readAsBytes();
+  String code = "+237";
+  @override
+  void dispose() {
+    _controllers.map((e) => e.dispose());
+    super.dispose();
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -110,6 +126,7 @@ class _LessorModalState extends State<LessorModal> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
                             child: TextFormField(
+                              controller: _controllers[0],
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.person),
                                 hintText: ' noms du bailleur',
@@ -135,6 +152,7 @@ class _LessorModalState extends State<LessorModal> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
                             child: TextFormField(
+                              controller: _controllers[1],
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.person),
                                 hintText: ' prenoms du bailleur',
@@ -160,10 +178,14 @@ class _LessorModalState extends State<LessorModal> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
                             child: TextFormField(
+                              controller: _controllers[2],
                               keyboardType: TextInputType.phone,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 prefixIcon: CountryCodePicker(
-                                  dialogSize: Size(500, 450),
+                                  onChanged: (value) => setState(() {
+                                    code = value.toString();
+                                  }),
+                                  dialogSize: const Size(500, 450),
                                   hideMainText: true,
                                   showFlagMain: true,
                                   showFlag: true,
@@ -171,7 +193,7 @@ class _LessorModalState extends State<LessorModal> {
                                   showOnlyCountryWhenClosed: true,
                                 ),
                                 hintText: 'Contact ',
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                 ),
@@ -269,6 +291,16 @@ class _LessorModalState extends State<LessorModal> {
                                       ),
                                     ),
                                   );
+                                  LessorModel model = LessorModel(
+                                      id: 1,
+                                      fname: _controllers[0].text,
+                                      lname: _controllers[1].text,
+                                      gender: _selectedGender.name,
+                                      tel: 6919491,
+                                      isActive: true,
+                                      //image: null,
+                                      inCameroon: true);
+                                  vm.setLessor(model.toJson());
                                 }
                               },
                               child: Text(

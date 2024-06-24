@@ -54,7 +54,7 @@ class _RenterModalState extends State<RenterModal> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(width * 0.37, 0, 0, 0),
                         child: const Text(
-                          "Ajouter un Bailleur",
+                          "Ajouter un Locataire",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -260,7 +260,7 @@ class _RenterModalState extends State<RenterModal> {
                               }
                             },
                             child: Text(
-                              'add lessor',
+                              'add Renter',
                               style: TextStyle(
                                   color: Theme.of(context)
                                       .scaffoldBackgroundColor

@@ -36,12 +36,20 @@ class LessorViewModel {
               model.lname,
               model.gender,
               model.tel,
-              model.isActive,
-              model.image ?? Uint8List(0),
+              model.isActive, model.inCameroon,
+              // model.image ?? Uint8List(0),
             ])
         .toList();
     _streamController.add(comparableData);
     //print(await getLessor());
+  }
+
+  void setLessor(Map<dynamic, dynamic> json) async {
+    print(json);
+    final ur = Uri.parse("http://127.0.0.1:8085/api/lessor");
+    final request = await http
+        .post(ur, body: json, headers: {"Content-Type": "application/json"});
+    print("${request.statusCode}");
   }
 
   void close() => _streamController.close();

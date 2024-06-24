@@ -21,7 +21,7 @@ class _RenterState extends State<Renter> with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
 
   RenterCardDetails detail =
-      RenterCardDetails(value1: 120, value2: 45, value3: 12, value4: 23);
+      RenterCardDetails(value1: 2, value2: 2, value3: 1, value4: 1);
 
   @override
   void initState() {
@@ -291,12 +291,12 @@ class RenterCardDetails {
           value: value2,
         ),
         CardModel(
-            otherIcon: "assets/images/residence.svg",
-            name: "Nombre de Residence",
+            otherIcon: "assets/images/avatar_male.svg",
+            name: "Homme",
             value: value3),
         CardModel(
             otherIcon: "assets/images/building.svg",
-            name: "Nombre d'immeuble",
+            name: "femme",
             value: value4),
       ];
 }

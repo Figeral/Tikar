@@ -24,7 +24,7 @@ class _LocationState extends State<Location>
   final _formKey = GlobalKey<FormState>();
 
   RentCardDetails detail =
-      RentCardDetails(value1: 16, value2: tR, value3: 12, value4: 23);
+      RentCardDetails(value1: 2, value2: 2, value3: 1, value4: 1);
   @override
   void initState() {
     _controller = AnimationController(
@@ -282,11 +282,11 @@ class RentCardDetails {
   List<CardModel> data() => <CardModel>[
         CardModel(
             //otherIcon: "assets/images/house_fill.svg",
-            icon: Icons.manage_accounts_outlined,
+            otherIcon: "assets/images/real-estate.svg",
             name: "Location en cour",
             value: value1),
         CardModel(
-          icon: Icons.man,
+          otherIcon: "assets/images/rente.svg",
           name: "Location Total",
           value: value2,
         ),

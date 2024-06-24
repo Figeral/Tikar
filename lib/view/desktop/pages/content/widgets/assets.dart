@@ -25,7 +25,7 @@ class _AssetsState extends State<Assets> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     vm.setStream();
-    detail = AssetCardDetails(value1: 08, value2: 18, value3: 12, value4: 23);
+    detail = AssetCardDetails(value1: 2, value2: 2, value3: 1, value4: 1);
     _controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300));
   }

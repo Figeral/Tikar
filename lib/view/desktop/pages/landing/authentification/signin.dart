@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tikar/constants/app_colors.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:tikar/view/desktop/pages/content/app_content.dart';
 
 class SignIn extends StatefulWidget {
@@ -16,6 +19,17 @@ class _SignInState extends State<SignIn> {
   TextEditingController telController = TextEditingController();
   TextEditingController pwController = TextEditingController();
   TextEditingController cpwController = TextEditingController();
+  XFile? _image;
+  final picker = ImagePicker();
+  void getImage() async {
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = pickedImage;
+      });
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -60,7 +74,14 @@ class _SignInState extends State<SignIn> {
                 padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.phone),
+                    prefixIcon: CountryCodePicker(
+                      dialogSize: Size(500, 450),
+                      hideMainText: true,
+                      showFlagMain: true,
+                      showFlag: true,
+                      initialSelection: 'CM',
+                      showOnlyCountryWhenClosed: true,
+                    ),
                     hintText: 'Téléphone ',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -152,6 +173,39 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 5, 25, 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        fixedSize:
+                            MaterialStateProperty.all(const Size(120, 50)),
+                        backgroundColor:
+                            MaterialStateProperty.all(AppColors.nightBue),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      onPressed: getImage,
+                      child: Text(
+                        'Image',
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.5),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ),
+                    _image != null
+                        ? Text(
+                            "${_image!.path.length > 50 ? _image?.path.substring(1, 60) : _image?.path}")
+                        : const SizedBox(),
+                  ],
+                ),
+              ),
               const SizedBox(
                 height: 10.0,
               ),
@@ -160,8 +214,12 @@ class _SignInState extends State<SignIn> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey),
               ),
+              const SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
                 style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(300, 60)),
                   backgroundColor:
                       MaterialStateProperty.all(Colors.deepPurpleAccent),
                   shape: MaterialStateProperty.all(
