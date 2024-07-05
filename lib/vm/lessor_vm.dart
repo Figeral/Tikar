@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import "package:http/http.dart" as http;
 import 'package:tikar/model/server/server_info.dart';
+import 'package:tikar/vm/utiles/add_components.dart';
 import 'package:tikar/Service/storage/lessor_service.dart';
 import 'package:tikar/model/data-models/lessor_model.dart';
 
@@ -29,9 +30,9 @@ class LessorViewModel {
       data.add(LessorModel.fromJson(element));
     }
     List<List<Object>> comparableData = [];
-    comparableData = data
+    comparableData = data.reversed
         .map((model) => [
-              model.id,
+              model.id ?? 0,
               model.fname,
               model.lname,
               model.gender,
@@ -44,13 +45,8 @@ class LessorViewModel {
     //print(await getLessor());
   }
 
-  void setLessor(Map<dynamic, dynamic> json) async {
-    print(json);
-    final ur = Uri.parse("http://127.0.0.1:8085/api/lessor");
-    final request = await http
-        .post(ur, body: json, headers: {"Content-Type": "application/json"});
-    print("${request.statusCode}");
-  }
+  Future<int> setLessor(Map<dynamic, dynamic> json) async =>
+      await addComponent("lessor", json);
 
   void close() => _streamController.close();
 }

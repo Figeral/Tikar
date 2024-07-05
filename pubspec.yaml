@@ -54,16 +54,20 @@ dependencies:
   # vector_math: ^2.1.4
   country_code_picker: ^3.0.0
   flutter_localization: ^0.2.0
+  freezed_annotation:  any
   flutter_localizations:
     sdk: flutter
+  pocketbase: ^0.18.1
   # freezed: ^2.5.2
  
 
 dev_dependencies:
+ 
   flutter_test:
     sdk: flutter
   json_serializable: any
-  build_runner: any
+  # build_runner: any
+  freezed:  any
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

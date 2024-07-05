@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,11 @@ class LessorModal extends StatefulWidget {
 }
 
 class _LessorModalState extends State<LessorModal> {
+  //Status  codes
+  int _statusCode = 201;
+  int get statusCode => _statusCode;
+  void setStatusCode(Future<int> code) async => _statusCode = await code;
+
   final vm = LessorViewModel();
   final _controllers = [
     TextEditingController(),
@@ -202,8 +208,8 @@ class _LessorModalState extends State<LessorModal> {
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'entrez un numéro contact valide';
-                                } else if (value.length < 4) {
-                                  return 'entrez au moin 4 charactère';
+                                } else if (value.length != 9) {
+                                  return 'entrez au moin 9 charactère';
                                 } else if (value.contains("@") ||
                                     value.contains("\$")) {
                                   return "caractère speciaux interdit";
@@ -280,27 +286,44 @@ class _LessorModalState extends State<LessorModal> {
                                 ),
                               ),
                               onPressed: () {
+                                LessorModel model = LessorModel(
+                                    id: 1,
+                                    fname: _controllers[0].text,
+                                    lname: _controllers[1].text,
+                                    gender: _selectedGender.name,
+                                    tel: int.parse(code + _controllers[2].text),
+                                    isActive: true,
+                                    //image: null,
+                                    inCameroon: true);
                                 if (_formKey.currentState!.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      behavior: SnackBarBehavior.floating,
-                                      content: Text("processing data"),
-                                      action: SnackBarAction(
-                                        label: "undo",
-                                        onPressed: () {},
+                                  setStatusCode(vm.setLessor(model.toJson()));
+                                  if (statusCode.toString().contains("2")) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.greenAccent,
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text("Success in adding data"),
+                                        action: SnackBarAction(
+                                          label: "undo",
+                                          onPressed: () {},
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                  LessorModel model = LessorModel(
-                                      id: 1,
-                                      fname: _controllers[0].text,
-                                      lname: _controllers[1].text,
-                                      gender: _selectedGender.name,
-                                      tel: 6919491,
-                                      isActive: true,
-                                      //image: null,
-                                      inCameroon: true);
-                                  vm.setLessor(model.toJson());
+                                    );
+                                  } else if (statusCode
+                                      .toString()
+                                      .contains("4")) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.redAccent,
+                                        behavior: SnackBarBehavior.floating,
+                                        content: Text("Failed in adding data"),
+                                        action: SnackBarAction(
+                                          label: "undo",
+                                          onPressed: () {},
+                                        ),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                               child: Text(

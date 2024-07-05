@@ -17,6 +17,7 @@ class Lessor extends StatefulWidget {
 }
 
 class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
+  //rendering variables
   bool _isVisible = false;
   final vm = LessorViewModel();
   TextEditingController searchInputController = TextEditingController();

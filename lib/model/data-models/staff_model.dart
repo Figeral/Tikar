@@ -1,14 +1,14 @@
 import 'dart:typed_data';
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
+// @JsonSerializable()
 class StaffModel {
   int id;
   String fname, lname;
   int tel;
   bool isActive;
 
-  Uint8List? image;
+  //Uint8List? image;
   String role;
   String post;
   StaffModel(
@@ -17,10 +17,10 @@ class StaffModel {
       required this.lname,
       required this.tel,
       required this.isActive,
-      required this.image,
+      //required this.image,
       required this.role,
       required this.post});
-  get element => [id, fname, lname, tel, isActive, image];
+  //get element => [id, fname, lname, tel, isActive, image];
   factory StaffModel.fromJson(Map<String, dynamic> json) {
     return StaffModel(
       id: json['id'],
@@ -30,7 +30,7 @@ class StaffModel {
       role: json['role'],
       post: json['post'],
       tel: json['tel'],
-      image: json['picture'],
+      //image: json['picture'],
     );
   }
 }

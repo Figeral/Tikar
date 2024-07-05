@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
+// @JsonSerializable()
 class RenterModel {
   int id;
   String fname, lname, gender;

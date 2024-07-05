@@ -33,7 +33,7 @@ class StaffViewModel {
               model.role,
               model.post,
               model.isActive,
-              model.image ?? Uint8List(0),
+              // model.image ?? Uint8List(0),
             ])
         .toList();
     _streamController.add(comparableData);

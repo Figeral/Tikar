@@ -2,8 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:tikar/model/data-models/asset_model.dart';
 import 'package:tikar/model/data-models/renter_model.dart';
 
-
-@JsonSerializable()
+// @JsonSerializable()
 class RentModel {
   int id;
   DateTime? startAt, endAt;

@@ -1,11 +1,14 @@
 import 'dart:typed_data';
 import 'package:tikar/constants/utile.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-// part lessor_model.g.dart;
-// @JsonSerializable(createToJson: true, explicitToJson: true)
+part "lessor_model.g.dart";
+
+@JsonSerializable(createToJson: true, explicitToJson: true)
+// @Freezed()
 class LessorModel {
-  int id;
+  int? id;
   String fname, lname, gender;
   int tel;
   bool isActive = true;
@@ -36,12 +39,13 @@ class LessorModel {
       inCameroon: json['inCameroon'],
     );
   }
-  Map<dynamic, dynamic> toJson() => {
-        "fname": fname,
-        "lname": lname,
-        //"tel": tel,
-        //"picture": image ?? [],
-        "gender": gender,
-        //"active": isActive
-      };
+  Map<String, dynamic> toJson() => _$LessorModelToJson(this);
+  // Map<dynamic, dynamic> toJson() => {
+  //       "fname": fname,
+  //       "lname": lname,
+  //       //"tel": tel,
+  //       //"picture": image ?? [],
+  //       "gender": gender,
+  //       //"active": isActive
+  //     };
 }
