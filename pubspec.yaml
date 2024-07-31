@@ -58,6 +58,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   pocketbase: ^0.18.1
+  calendar_view: ^1.2.0
   # freezed: ^2.5.2
  
 
