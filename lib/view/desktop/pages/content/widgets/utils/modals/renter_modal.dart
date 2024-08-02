@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:tikar/constants/utile.dart';
 import 'package:image_picker/image_picker.dart';
@@ -197,12 +196,12 @@ class _RenterModalState extends State<RenterModal> {
                               children: [
                                 const Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                      EdgeInsets.fromLTRB(20, 0, 0, 0),
                                   child: Text('Select your gender:'),
                                 ),
                                 Expanded(
                                   child: RadioListTile<Gender>(
-                                    title: Text('Male'),
+                                    title: const Text('Male'),
                                     value: Gender.male,
                                     groupValue: _selectedGender,
                                     onChanged: (value) {
@@ -214,7 +213,7 @@ class _RenterModalState extends State<RenterModal> {
                                 ),
                                 Expanded(
                                   child: RadioListTile<Gender>(
-                                    title: Text('Female'),
+                                    title: const Text('Female'),
                                     value: Gender.female,
                                     groupValue: _selectedGender,
                                     onChanged: (value) {
@@ -226,7 +225,7 @@ class _RenterModalState extends State<RenterModal> {
                                 ),
                                 Expanded(
                                   child: RadioListTile<Gender>(
-                                    title: Text('Other'),
+                                    title: const Text('Other'),
                                     value: Gender.other,
                                     groupValue: _selectedGender,
                                     onChanged: (value) {
@@ -244,11 +243,11 @@ class _RenterModalState extends State<RenterModal> {
                           ),
                           ElevatedButton(
                             style: ButtonStyle(
-                              fixedSize: MaterialStateProperty.all(
+                              fixedSize: WidgetStateProperty.all(
                                   Size(width * 0.92, 60)),
                               backgroundColor:
-                                  MaterialStateProperty.all(AppColors.nightBue),
-                              shape: MaterialStateProperty.all(
+                                  WidgetStateProperty.all(AppColors.nightBue),
+                              shape: WidgetStateProperty.all(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),

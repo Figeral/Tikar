@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-import 'package:tikar/constants/utile.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

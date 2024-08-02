@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tikar/vm/staff_vm.dart';
 import '../../../../../constants/app_colors.dart';
 import 'package:tikar/model/app-model/card_model.dart';
-import 'package:tikar/view/desktop/pages/content/widgets/utils/modals/custom_modals.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/utils/data_tables/staff_dataTable.dart';
 
 class Employee extends StatefulWidget {
@@ -16,7 +15,7 @@ class Employee extends StatefulWidget {
 class _EmployeeState extends State<Employee> {
   List<List<Object>> emp = [];
   int Et = 0;
-  bool _isVisible = false;
+  final bool _isVisible = false;
   final vm = StaffViewModel();
   TextEditingController searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();

@@ -98,10 +98,10 @@ class _LoginState extends State<Login> {
             ),
             ElevatedButton(
               style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(const Size(300, 60)),
+                fixedSize: WidgetStateProperty.all(const Size(300, 60)),
                 backgroundColor:
-                    MaterialStateProperty.all(Colors.deepPurpleAccent),
-                shape: MaterialStateProperty.all(
+                    WidgetStateProperty.all(Colors.deepPurpleAccent),
+                shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

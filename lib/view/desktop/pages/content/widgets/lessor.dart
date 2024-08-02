@@ -1,8 +1,6 @@
 import 'dart:math' as math;
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'utils/modals/lessor_modal.dart';
 import 'package:tikar/vm/lessor_vm.dart';
 import '../../../../../constants/app_colors.dart';
@@ -57,9 +55,9 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
     final sHeight = MediaQuery.of(context).size.height;
     final sWidth = MediaQuery.of(context).size.width;
     double dividor = 1;
-    final miniSize = 70;
-    final miniOpacity = 0.5;
-    final macroOpacity = 0;
+    const miniSize = 70;
+    const miniOpacity = 0.5;
+    const macroOpacity = 0;
     double dx = 50;
     double dy = 100;
     return Scaffold(
@@ -218,7 +216,7 @@ class _LessorState extends State<Lessor> with SingleTickerProviderStateMixin {
                 child: Container(
                   width: sWidth,
                   height: sHeight + sHeight / 2,
-                  color: Color.fromARGB(112, 12, 12, 12),
+                  color: const Color.fromARGB(112, 12, 12, 12),
                 ),
               ),
             )

@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:tikar/model/data-models/staff_model.dart';
 import 'package:tikar/model/data-models/lessor_model.dart';
 

@@ -55,9 +55,9 @@ class _LocationState extends State<Location>
     final sHeight = MediaQuery.of(context).size.height;
     final sWidth = MediaQuery.of(context).size.width;
     double dividor = 1;
-    final miniSize = 70;
-    final miniOpacity = 0.5;
-    final macroOpacity = 0;
+    const miniSize = 70;
+    const miniOpacity = 0.5;
+    const macroOpacity = 0;
     double dx = 50;
     double dy = 100;
 
@@ -218,7 +218,7 @@ class _LocationState extends State<Location>
                 child: Container(
                   width: sWidth,
                   height: sHeight + sHeight / 2,
-                  color: Color.fromARGB(112, 12, 12, 12),
+                  color: const Color.fromARGB(112, 12, 12, 12),
                 ),
               ),
             )

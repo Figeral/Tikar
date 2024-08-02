@@ -25,7 +25,7 @@ class AssetPaginatedData extends StatelessWidget {
     required this.col6,
   });
 
-  bool _isVisible = true;
+  final bool _isVisible = true;
 
   @override
   Widget build(BuildContext context) {

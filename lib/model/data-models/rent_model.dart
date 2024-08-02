@@ -1,4 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:tikar/model/data-models/asset_model.dart';
 import 'package:tikar/model/data-models/renter_model.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tikar/vm/sidebar_vm.dart';
-import 'package:tikar/constants/app_colors.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/rent.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/staff.dart';
 import 'package:tikar/view/desktop/pages/content/widgets/assets.dart';
@@ -73,7 +72,7 @@ class _AppContentState extends State<AppContent> {
                   return Scaffold(
                     drawer: Drawer(
                       child: Container(
-                        child: Text("hello mf"),
+                        child: const Text("hello mf"),
                       ),
                     ),
                     appBar: AppBar(

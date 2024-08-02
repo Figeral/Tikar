@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tikar/view/desktop/desktop.dart';
-import 'package:tikar/view/desktop/pages/content/app_content.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
