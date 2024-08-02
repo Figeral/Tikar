@@ -47,6 +47,5 @@ class LessorViewModel {
 
   Future<int> setLessor(Map<dynamic, dynamic> json) async =>
       await addComponent("lessor", json);
-
   void close() => _streamController.close();
 }
